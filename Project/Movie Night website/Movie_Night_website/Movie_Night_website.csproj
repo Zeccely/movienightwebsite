@@ -7,4 +7,9 @@
     <RootNamespace>Movie_Night_website</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.3" />
+  </ItemGroup>
+
 </Project>

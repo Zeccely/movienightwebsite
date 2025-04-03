@@ -1,0 +1,17 @@
+﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+.page 
+{
+    background-color : lightpink;
+}
+
+.menubar
+{
+    background-color : lightblue;
+}
+
+.content 
+{
+    background-color : lightgreen;
+}
