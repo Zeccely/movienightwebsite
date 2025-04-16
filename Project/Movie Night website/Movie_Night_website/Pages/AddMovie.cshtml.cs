@@ -5,8 +5,9 @@ namespace Movie_Night_website.Pages
 {
     public class AddMovieModel : PageModel
     {
-        public void OnGet()
+        public void OnPost()
         {
+
         }
     }
 }

@@ -13,4 +13,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Pages\Movie_Pages\" />
+  </ItemGroup>
+
 </Project>
