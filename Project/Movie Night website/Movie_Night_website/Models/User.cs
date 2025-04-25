@@ -8,5 +8,13 @@
 
         public string Password { get; set; }
 
+        public UserPower PowerLevel { get; }
+
     }
+}
+
+public enum UserPower
+{
+    Regular,
+    Organizer
 }

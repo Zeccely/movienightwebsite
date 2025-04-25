@@ -9,9 +9,9 @@ namespace Movie_Night_website.Models
         public string Title { get; set; } = string.Empty;
         public string TrailerURL { get; set; } = string.Empty;
 
-        public Movie(int movieID, string title, string trailerURL)
+        public Movie(int mediaID, string title, string trailerURL)
         {
-            this.MediaID = movieID;
+            this.MediaID = mediaID;
             this.Title = title;
             this.TrailerURL = trailerURL;
         }

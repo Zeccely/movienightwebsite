@@ -2,7 +2,7 @@
 
 namespace Movie_Night_website.Services
 {
-    public class MovieNightManager
+    public class MediaManager
     {
         public List<IMedia> ContenderMedia { get; set; } = [];
 
