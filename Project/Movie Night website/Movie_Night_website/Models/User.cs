@@ -10,6 +10,13 @@
 
         public UserPower PowerLevel { get; }
 
+        public User(int userID, string username, string password, UserPower powerLevel)
+        {
+            UserID = userID;
+            Username = username;
+            Password = password;
+            PowerLevel = powerLevel;
+        }
     }
 }
 

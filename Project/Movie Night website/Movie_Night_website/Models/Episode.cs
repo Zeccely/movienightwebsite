@@ -9,5 +9,13 @@
         public string EpisodeTitle { get; set; }
 
         public int EpisodeNumber { get; set; }
+
+        public Episode(int episodeID, int seriesID, string episodeTitle, int episodeNumber)
+        {
+            EpisodeID = episodeID;
+            SeriesID = seriesID;
+            EpisodeTitle = episodeTitle;
+            EpisodeNumber = episodeNumber;
+        }
     }
 }

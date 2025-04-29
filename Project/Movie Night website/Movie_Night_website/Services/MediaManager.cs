@@ -4,12 +4,14 @@ namespace Movie_Night_website.Services
 {
     public class MediaManager
     {
-        public List<IMedia> ContenderMedia { get; set; } = [];
+        public List<IMedia> ContributedMedia { get; set; } = [];
 
         public List<IMedia> TheCurrentList { get; set; } = [];
 
-        public List<IMedia> MovieNightOrganizerList { get; set; } = [];
+        
 
         public List<IMedia> WatchedMedia { get; set; } = [];
     }
+
+
 }
