@@ -4,17 +4,29 @@
 }
 <div>
     <h1> Add movie for voting! </h1>
-    <form>
+    <form method="post" id="AddMovieForm">
         <div class="mb-3">
             <label class="form-label">Movie Title</label>
-            <input class="form-control" id="Movietitle">
+            <input asp-for="Title" class="form-control" id="Title" name="Title" required="">
 
         </div>
         <div class="mb-3">
-            <label for="MovieTrailer" class="form-label">Movie trailer URL</label>
-            <input type="url" class="form-control" id="MovieURL">
+            <label for="TrailerURL" class="form-label">Movie trailer URL</label>
+            <input asp-for="TrailerURL" type="url" class="form-control" id="TrailerURL" name="TrailerURL" required="">
+        </div>
+        <div class="mb-3">
+			<label class="form-label">What are you adding?</label>
+            <select asp-for="Type" id="Type" name="Type" form="AddMovieForm">
+                <option value="Movie">Movie</option>
+                <option value="Series">Series</option>
+            </select>
+            <div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+			
+        </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+	
 </div>
 

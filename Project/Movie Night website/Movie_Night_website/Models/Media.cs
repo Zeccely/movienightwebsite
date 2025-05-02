@@ -1,4 +1,6 @@
-﻿namespace Movie_Night_website.Models
+﻿using System.CodeDom;
+
+namespace Movie_Night_website.Models
 {
     public class Media
     {
@@ -8,17 +10,19 @@
 
         public string Title { get; set; }
 
-        public string Genre { get; set; }
-
         public MediaType MediaType { get; set; }
 
-        public Media (int mediaID, string trailerURL, string title, string genre, MediaType mediaType)
+        public Media (int mediaID, string trailerURL, string title, MediaType mediaType)
         {
             MediaID = mediaID;
             TrailerURL = trailerURL;
             Title = title;
-            Genre = genre;
             MediaType = mediaType;
+        }
+
+        public Media GetMedia() 
+        {
+            return null;
         }
     }
 }

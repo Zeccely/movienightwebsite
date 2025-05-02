@@ -14,18 +14,18 @@ namespace Movie_Night_website.Services
 
         }
 
-        public int GetVotes(IMedia media)
+        public int GetVotes(Media media)
         {
             return 0;
         }
 
-        public int GetVetoes(IMedia media)
+        public int GetVetoes(Media media)
         {
             return 0;
         }
 
-        public void EvaluateVotes(IMedia media) { }
+        public void EvaluateVotes(Media media) { }
 
-        public void UserVoteCheck(User user, IMedia media) { }
+        public void UserVoteCheck(User user, Media media) { }
     }
 }

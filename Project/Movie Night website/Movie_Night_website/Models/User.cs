@@ -8,19 +8,19 @@
 
         public string Password { get; set; }
 
-        public UserPower PowerLevel { get; }
+        public Role Role { get; }
 
-        public User(int userID, string username, string password, UserPower powerLevel)
+        public User(int userID, string username, string password, Role role)
         {
             UserID = userID;
             Username = username;
             Password = password;
-            PowerLevel = powerLevel;
+            Role = role;
         }
     }
 }
 
-public enum UserPower
+public enum Role
 {
     Regular,
     Organizer
