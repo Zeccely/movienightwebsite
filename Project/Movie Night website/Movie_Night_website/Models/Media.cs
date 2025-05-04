@@ -11,6 +11,8 @@ namespace Movie_Night_website.Models
         public string Title { get; set; }
 
         public MediaType MediaType { get; set; }
+        public int UserID { get; set; }
+        public User User { get; set; }
 
         public Media (int mediaID, string trailerURL, string title, MediaType mediaType)
         {
