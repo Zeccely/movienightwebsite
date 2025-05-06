@@ -1,6 +1,8 @@
 ﻿
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Movie_Night_website.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Movie_Night_website.Data
@@ -38,5 +40,27 @@ namespace Movie_Night_website.Data
 
 
         }
+
+        //public User SignIn (string username, string password)
+        //{
+        //    string query = "Select from Users (Username, Password)";
+        //    using SqlConnection sqlConnection = new SqlConnection(connectionString);
+        //    try
+        //    {
+        //        sqlConnection.Open();
+        //        using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+        //        sqlCommand.ExecuteNonQuery();
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        Console.WriteLine($"Database error: {ex.Message}");
+        //    }
+
+
+        //    sqlConnection.Close();
+
+
+        //}
     }
 }

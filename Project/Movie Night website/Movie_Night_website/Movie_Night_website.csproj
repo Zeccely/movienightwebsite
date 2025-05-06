@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <Folder Include="Pages\Movie_Pages\" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
 </Project>
