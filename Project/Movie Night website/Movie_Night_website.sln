@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movie_Night_website", "Movie_Night_website\Movie_Night_website.csproj", "{06ED4A0E-720B-493C-81A7-35800171DF14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieNight.DataAccess", "MovieNight.DataAccess\MovieNight.DataAccess.csproj", "{A5E4B043-3173-4990-B621-04B56657E578}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{06ED4A0E-720B-493C-81A7-35800171DF14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06ED4A0E-720B-493C-81A7-35800171DF14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06ED4A0E-720B-493C-81A7-35800171DF14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5E4B043-3173-4990-B621-04B56657E578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5E4B043-3173-4990-B621-04B56657E578}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5E4B043-3173-4990-B621-04B56657E578}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5E4B043-3173-4990-B621-04B56657E578}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

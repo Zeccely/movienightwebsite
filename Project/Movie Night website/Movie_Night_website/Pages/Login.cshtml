@@ -10,15 +10,16 @@
 	<div class="login-box">
 		<h2>Login</h2>
 		<form action="#" method="POST">
-			<input type="text" id="username" required placeholder="Username" />
-			<input type="password" id="password" required placeholder="Password" />
+			<input asp-for="Username "type="text" id="username" required placeholder="Username" />
+			<input asp-for="Password" type="password" id="password" required placeholder="Password" /> 
 			<div class="options">
-				<input type="checkbox" id="remember" name="remember" />
-				<label for="remember">Remember me</label>
-				<a href="#">Forgot Password?</a>
+				<input type="checkbox" id="remember" name="remember" /> 
+
+				<label for="remember">Remember me</label> <!-- Cookie Toggler? -->
+				<a href="#">Forgot Password?</a> <!-- Will add this function later -->
 			</div>
 			<button type="submit">Login</button>
-			<p>Do not have an account? <a href="#" id="register">Register</a> </p>
+			<p>Do not have an account? <a href="/Register" id="register">Register</a> </p>
 		</form>
 
 	</div>

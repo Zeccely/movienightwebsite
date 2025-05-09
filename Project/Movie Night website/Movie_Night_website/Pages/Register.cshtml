@@ -2,6 +2,23 @@
 @model Movie_Night_website.Pages.RegisterModel
 @{
 	Layout = null;
+	<link rel="stylesheet" href="~/css/Register.css" />
 }
+<div class="glass-container">
+	<div class="Register-box">
+		<h2>Register</h2>
+		<form action="#" method="POST">
+
+			<input type="text" id="NewUsername" required placeholder="Username" />
+			<input type="password" id="NewPassword" required placeholder="Password" />
+			
+			
+		</form>
+		<button name="registerbtn" id="registerbtn" type="submit"> Register </button>
+		<p>Already have an account? <a href="/Login" id="register">Go to Login</a> </p>
+
+	</div>
+
+</div>
 
 }

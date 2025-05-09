@@ -1,5 +1,6 @@
 ﻿
 using System.Data.SqlClient;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Configuration;
 using Movie_Night_website.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -41,26 +42,73 @@ namespace Movie_Night_website.Data
 
         }
 
-        //public User SignIn (string username, string password)
-        //{
-        //    string query = "Select from Users (Username, Password)";
-        //    using SqlConnection sqlConnection = new SqlConnection(connectionString);
-        //    try
-        //    {
-        //        sqlConnection.Open();
-        //        using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+        public void AddUser(string username, string hashpassword)
+        {
+            string query = "Insert into Users (Username, Password) Values (@Username, @Password) ";
+            using SqlConnection sqlConnection = new SqlConnection(connectionString);
 
-        //        sqlCommand.ExecuteNonQuery();
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        Console.WriteLine($"Database error: {ex.Message}");
-        //    }
+            try
+            {
+                sqlConnection.Open();
+                using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@Username", username);
+                sqlCommand.Parameters.AddWithValue("@Password", hashpassword);
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
 
+        public User GetUser (string username, string hashpassword)
+        {
 
-        //    sqlConnection.Close();
+            User fetchedUser = null;
+            string query = "Select Username, Password from Users where Username = @username";
+            using SqlConnection sqlConnection = new SqlConnection(connectionString);
+         
+            try
+            {
+                sqlConnection.Open();
+                using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@Username", username);
 
+                using SqlDataReader reader = sqlCommand.ExecuteReader();
+                if (reader.HasRows) 
+                {
+                    while (reader.Read())
+                    {
+                        int Id = reader.GetInt32(0);
+                        string dbusername = reader.GetString(1);
+                        string dbhashpassword = reader.GetString(2);
+                        bool comparison = BCrypt.Net.BCrypt.EnhancedVerify(dbhashpassword, hashpassword); // take the S from SOLID and change this
 
-        //}
+                        if (comparison)
+                        {
+                            fetchedUser = new User(Id, dbusername, dbhashpassword, Role.Regular);
+                            return fetchedUser;
+                        }
+                     
+                    }
+                }
+                return null;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine($"Database error: {ex.Message}");
+                return null;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+            
+
+        }
     }
 }

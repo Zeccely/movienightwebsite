@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore; //you gotta go
+//using Microsoft.EntityFrameworkCore; //you gotta go
 using Movie_Night_website.Data;
 using Movie_Night_website;
 using Movie_Night_website.Models;
@@ -6,7 +6,10 @@ using Movie_Night_website.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options => 
+{
+    options.Conventions.AddPageRoute("/Login", "");
+});
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 builder.Services.AddScoped<MovieNightDatabase>();
 var app = builder.Build();
