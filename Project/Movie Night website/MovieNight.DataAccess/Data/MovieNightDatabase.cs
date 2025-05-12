@@ -4,7 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Configuration;
 using Movie_Night_website.Models;
 
-namespace Movie_Night_website.Data
+namespace MovieNight.DataAccess.Data
 
 {
     public class MovieNightDatabase
@@ -22,7 +22,7 @@ namespace Movie_Night_website.Data
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
             try
             {
-                sqlConnection.Open();    
+                sqlConnection.Open();
                 using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@Title", title);
                 sqlCommand.Parameters.AddWithValue("@TrailerURL", trailerURL);
@@ -33,7 +33,7 @@ namespace Movie_Night_website.Data
             {
                 Console.WriteLine($"Database error: {ex.Message}");
             }
-        
+
 
             sqlConnection.Close();
 
@@ -63,13 +63,13 @@ namespace Movie_Night_website.Data
             }
         }
 
-        public User GetUser (string username, string hashpassword)
+        public User GetUser(string username, string hashpassword)
         {
 
             User fetchedUser = null;
             string query = "Select Username, Password from Users where Username = @username";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
-         
+
             try
             {
                 sqlConnection.Open();
@@ -77,7 +77,7 @@ namespace Movie_Night_website.Data
                 sqlCommand.Parameters.AddWithValue("@Username", username);
 
                 using SqlDataReader reader = sqlCommand.ExecuteReader();
-                if (reader.HasRows) 
+                if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
@@ -91,7 +91,7 @@ namespace Movie_Night_website.Data
                             fetchedUser = new User(Id, dbusername, dbhashpassword, Role.Regular);
                             return fetchedUser;
                         }
-                     
+
                     }
                 }
                 return null;
@@ -105,7 +105,7 @@ namespace Movie_Night_website.Data
             {
                 sqlConnection.Close();
             }
-            
+
 
         }
     }
