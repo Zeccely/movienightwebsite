@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Movie_Night_website.Data;
+using Movie_Night_Website.DataAccess.Data;
+
 
 namespace Movie_Night_website.Pages
 {
@@ -21,8 +22,9 @@ namespace Movie_Night_website.Pages
 
         public void OnPost()
         {
-            string passwordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(NewPassword, 13); //this is cheats
-            _database.AddUser(NewUsername, passwordHash); //include salt
+            string salt = BCrypt.Net.BCrypt.GenerateSalt(13);
+            string hash = BCrypt.Net.BCrypt.HashPassword(NewPassword, salt); 
+            _database.AddUser(NewUsername, hash, salt); //include salt
         }
     }
 }

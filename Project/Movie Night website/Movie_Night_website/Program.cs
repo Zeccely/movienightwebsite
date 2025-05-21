@@ -1,6 +1,7 @@
 //using Microsoft.EntityFrameworkCore; //you gotta go
 
-using Movie_Night_website;
+using Movie_Night_Website;
+using Movie_Night_Website.DataAccess.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,8 +11,33 @@ builder.Services.AddRazorPages(options =>
 {
     options.Conventions.AddPageRoute("/Login", "");
 });
+
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
-//builder.Services.AddScoped<MovieNightDatabase>();
+
+builder.Services.AddScoped<MovieNightDatabase>();
+
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromDays(3);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddAuthentication("MyCookieAuth")
+    .AddCookie("MyCookieAuth", options =>
+    {
+        options.LoginPath = "/Login";
+        options.LogoutPath = "/Logout";
+        options.Cookie.Name = "MovieNightAuth";
+        options.ExpireTimeSpan = TimeSpan.FromDays(7); 
+    });
+
+builder.Services.AddAuthorization();
+
+
+
 var app = builder.Build();
 
 
@@ -34,8 +60,13 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+app.UseAuthorization();
+
+app.UseSession();
+
 
 app.MapStaticAssets();
+
 app.MapRazorPages()
    .WithStaticAssets();
 

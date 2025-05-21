@@ -1,10 +1,14 @@
 ﻿
-using System.Data.SqlClient;      //Use the data layer thing
+using Microsoft.Data.SqlClient;      //Use the data layer thing
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Configuration;
 using Movie_Night_website.Models;
+using BCrypt.Net;
 
-namespace MovieNight.DataAccess.Data
+
+
+
+namespace Movie_Night_Website.DataAccess.Data
 
 {
     public class MovieNightDatabase
@@ -16,9 +20,9 @@ namespace MovieNight.DataAccess.Data
             connectionString = configuration.GetConnectionString("HomeConnection");
         }
 
-        public void AddMediaToDB(string title, string trailerURL, string mediatype)
+        public void AddMediaToDB(string title, string trailerURL, int mediatypeID, int userID)
         {
-            string query = $"Insert into Media (Title, TrailerURL, MediaType) Values (@Title, @TrailerURL, @MediaType)";
+            string query = $"Insert into Media (Title, TrailerURL, MediaTypeID, UserID) Values (@Title, @TrailerURL, @MediaTypeID, UserID)";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
             try
             {
@@ -26,7 +30,8 @@ namespace MovieNight.DataAccess.Data
                 using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@Title", title);
                 sqlCommand.Parameters.AddWithValue("@TrailerURL", trailerURL);
-                sqlCommand.Parameters.AddWithValue("@MediaType", mediatype);
+                sqlCommand.Parameters.AddWithValue("@MediaTypeID", mediatypeID);
+                sqlCommand.Parameters.AddWithValue("@UserID", userID);
                 sqlCommand.ExecuteNonQuery();
             }
             catch (SqlException ex)
@@ -39,10 +44,9 @@ namespace MovieNight.DataAccess.Data
 
 
         }
-
-        public void AddUser(string username, string hashpassword)
+        public void AddUser(string username, string hashpassword, string salt)
         {
-            string query = "Insert into Users (Username, Password) Values (@Username, @Password) ";
+            string query = "Insert into Users (Username, Password, Salt) Values (@Username, @Password, @Salt) ";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
 
             try
@@ -51,6 +55,7 @@ namespace MovieNight.DataAccess.Data
                 using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@Username", username);
                 sqlCommand.Parameters.AddWithValue("@Password", hashpassword);
+                sqlCommand.Parameters.AddWithValue("@Salt", salt);
                 sqlCommand.ExecuteNonQuery();
             }
             catch (SqlException ex)
@@ -74,7 +79,7 @@ namespace MovieNight.DataAccess.Data
             {
                 sqlConnection.Open();
                 using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@Username", username);
+                sqlCommand.Parameters.AddWithValue("@username", username);
 
                 using SqlDataReader reader = sqlCommand.ExecuteReader();
                 if (reader.HasRows)
@@ -84,15 +89,11 @@ namespace MovieNight.DataAccess.Data
                         int Id = reader.GetInt32(0);
                         string dbusername = reader.GetString(1);
                         string dbhashpassword = reader.GetString(2);
-                        bool comparison = BCrypt.Net.BCrypt.EnhancedVerify(dbhashpassword, hashpassword); // take the S from SOLID and change this
+                        string dbsalt = reader.GetString(3);
 
-                        if (comparison)
-                        {
-                            fetchedUser = new User(Id, dbusername, dbhashpassword, Role.Regular);
-                            return fetchedUser;
-                        }
-
+                        fetchedUser = new User(Id, dbusername, dbhashpassword, Role.Regular);
                     }
+                    return fetchedUser;
                 }
                 return null;
             }
