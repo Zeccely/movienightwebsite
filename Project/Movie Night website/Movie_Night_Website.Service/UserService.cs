@@ -3,27 +3,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Movie_Night_Website.DataAccess.Data;
+using Movie_Night_Website.Domain.Interfaces;
+using BCrypt.Net;
+using Movie_Night_website.Models;
+using System.Net;
 
 
 namespace Movie_Night_Website.Service
 {
-    public class UserService
+    public class UserService 
     {
-        private readonly MovieNightDatabase _database;
+        private readonly IUserRepository _userRepo;
+        private readonly IAuthentication _auth;
 
-        public UserService(MovieNightDatabase database)
+        public UserService(IUserRepository userRepo, IAuthentication auth)
         {
-            _database = database;
+            _userRepo = userRepo;
+            _auth = auth;
         }
 
-        public bool VerifyPassword(string userPassword, string dbPassword)
-        {
-            return BCrypt.Net.BCrypt.EnhancedVerify(userPassword, dbPassword);
-        }
-        public void CreateUser (string username, string password)
-        {
 
+        public User Login(string username, string plainpassword)
+        {
+            var user = _userRepo.GetUser(username);
+            if (user == null)
+            {
+                return null;
+            }
+
+            bool verified = _auth.VerifyPassword(user.Password, plainpassword);
+
+            if (!verified)
+            {
+                return null;
+            }
+            else
+            {
+                return user;
+            }
+
+        }
+
+        public void RegisterUser(string username, string password)
+        {
+            string hashedPassword = _auth.HashPassword(password);
+            string salt = _auth.GenerateSalt(hashedPassword);
+            _userRepo.AddUser(username, hashedPassword, salt);
         }
     }
 }

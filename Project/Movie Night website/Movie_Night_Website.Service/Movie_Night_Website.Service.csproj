@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MovieNight.Core\Movie_Night_Website.Domain.csproj" />
-    <ProjectReference Include="..\MovieNight.DataAccess\Movie_Night_Website.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

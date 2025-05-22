@@ -1,13 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Movie_Night_Website.DataAccess.Data;
+using Movie_Night_Website.Service;
 
 
 namespace Movie_Night_website.Pages
 {
     public class RegisterModel : PageModel
     {
-        private MovieNightDatabase _database;
+        private UserService userserve;
+
+
+
         [BindProperty]
         public string NewUsername { get; set; }
 
@@ -22,9 +25,8 @@ namespace Movie_Night_website.Pages
 
         public void OnPost()
         {
-            string salt = BCrypt.Net.BCrypt.GenerateSalt(13);
-            string hash = BCrypt.Net.BCrypt.HashPassword(NewPassword, salt); 
-            _database.AddUser(NewUsername, hash, salt); //include salt
+            
+            userserve.RegisterUser(NewUsername, NewPassword);
         }
     }
 }

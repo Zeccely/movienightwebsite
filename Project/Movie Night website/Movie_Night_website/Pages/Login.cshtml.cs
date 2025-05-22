@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Movie_Night_Website.DataAccess.Data;
+using Movie_Night_Website.Service;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Movie_Night_website.Pages
 {
     public class LoginModel : PageModel
     {
-        private readonly MovieNightDatabase _database;
+        private readonly UserService userService;
 
         [BindProperty]
         public string Username { get; set; }
@@ -21,9 +21,7 @@ namespace Movie_Night_website.Pages
 
         public void OnPost()
         {
-            string hashPassword = BCrypt.Net.BCrypt.EnhancedHashPassword(Password);
-            
-            _database.GetUser(Username, hashPassword);
+           userService.Login(Username, Password);
         }
     }
 }

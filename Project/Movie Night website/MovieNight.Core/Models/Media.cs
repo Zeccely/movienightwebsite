@@ -22,9 +22,5 @@ namespace Movie_Night_website.Models
             MediaType = mediaType;
         }
 
-        public Media GetMedia() 
-        {
-            return null;
-        }
     }
 }

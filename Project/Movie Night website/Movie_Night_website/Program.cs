@@ -1,7 +1,9 @@
 //using Microsoft.EntityFrameworkCore; //you gotta go
 
+using Movie_Night_website.Services;
 using Movie_Night_Website;
-using Movie_Night_Website.DataAccess.Data;
+using Movie_Night_Website.Domain.Interfaces;
+using Movie_Night_Website.Service;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +16,10 @@ builder.Services.AddRazorPages(options =>
 
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
-builder.Services.AddScoped<MovieNightDatabase>();
+//I refuse to depend on DataAccess. but am I supposed to?
+
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<MediaService>();
 
 builder.Services.AddDistributedMemoryCache();
 

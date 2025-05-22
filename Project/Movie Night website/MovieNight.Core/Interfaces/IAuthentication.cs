@@ -7,9 +7,10 @@ using Movie_Night_website.Models;
 
 namespace Movie_Night_Website.Domain.Interfaces
 {
-    internal interface IAuthentication
+    public interface IAuthentication
     {
-        User Login (string username, string password);
+        string GenerateSalt(string password);
+        string HashPassword(string userPassword);
         bool VerifyPassword(string userpassword, string hashedpassword);
     }
 }

@@ -2,18 +2,18 @@ using System.Data.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Movie_Night_Website.DataAccess.Data;
+using Movie_Night_website.Services;
 
 namespace Movie_Night_website.Pages
 {
     [Authorize]
     public class AddMovieModel : PageModel
     {
-        private MovieNightDatabase _database;
+        private readonly MediaService _mediaService;
 
-        public AddMovieModel(MovieNightDatabase database)
+        public AddMovieModel(MediaService mediaService)
         {
-            _database = database;
+            _mediaService = mediaService;
         }
 
         [BindProperty]
@@ -23,13 +23,13 @@ namespace Movie_Night_website.Pages
         public string TrailerURL { get; set; }
 
         [BindProperty]
-        public int TypeID { get; set; }
+        public string MediaType { get; set; }
 
         public int UserID { get; set; }
 
         public void OnPost()
         {
-            _database.AddMediaToDB(Title, TrailerURL, TypeID, UserID);
+            _mediaService.AddMediaToDB(Title, TrailerURL, MediaType, UserID);
         }
 
         public void OnGet() 
