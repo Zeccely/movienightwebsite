@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MovieNight.DataAccess\Movie_Night_Website.DataAccess.csproj" />
     <ProjectReference Include="..\Movie_Night_Website.Service\Movie_Night_Website.Service.csproj" />
   </ItemGroup>
 

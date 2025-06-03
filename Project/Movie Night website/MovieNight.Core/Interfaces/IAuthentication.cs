@@ -9,8 +9,8 @@ namespace Movie_Night_Website.Domain.Interfaces
 {
     public interface IAuthentication
     {
-        string GenerateSalt(string password);
-        string HashPassword(string userPassword);
+        string GenerateSalt();
+        string HashPassword(string userPassword, string salt);
         bool VerifyPassword(string userpassword, string hashedpassword);
     }
 }

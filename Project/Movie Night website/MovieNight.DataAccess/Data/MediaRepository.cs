@@ -13,78 +13,15 @@ using System.Net.Mime;
 namespace Movie_Night_Website.DataAccess.Data
 
 {
-    public class MovieNightDatabase: IUserRepository , IMediaRepository
+    public class MediaRepository: IMediaRepository
     {
         private string connectionString;
 
-        public MovieNightDatabase(IConfiguration configuration)
+        public MediaRepository(IConfiguration configuration)
         {
-            connectionString = configuration.GetConnectionString("LaptopConnection");
+            connectionString = configuration.GetConnectionString("HomeConnection");
         }
 
-        public void AddUser(string username, string hashpassword, string salt)
-        {
-            string query = "Insert into Users (Username, Password, Salt) Values (@Username, @Password, @Salt) ";
-            using SqlConnection sqlConnection = new SqlConnection(connectionString);
-
-            try
-            {
-                sqlConnection.Open();
-                using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@Username", username);
-                sqlCommand.Parameters.AddWithValue("@Password", hashpassword);
-                sqlCommand.Parameters.AddWithValue("@Salt", salt);
-                sqlCommand.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-        }
-
-        public User GetUser(string username)
-        {
-
-            User fetchedUser = null;
-            string query = "Select Username, Password from Users where Username = @username";
-            using SqlConnection sqlConnection = new SqlConnection(connectionString);
-
-            try
-            {
-                sqlConnection.Open();
-                using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@username", username);
-
-                using SqlDataReader reader = sqlCommand.ExecuteReader();
-                if (reader.Read())
-                {
-                    int Id = reader.GetInt32(0);
-                    string dbusername = reader.GetString(1);
-                    string dbhashpassword = reader.GetString(2);
-                    string dbsalt = reader.GetString(3);
-                    Role dbrole = (Role)Enum.Parse(typeof(Role), dbusername);
-
-                    return fetchedUser = new User(Id, dbusername, dbhashpassword, dbrole);
-                    
-                }
-                return null;
-            }
-            catch (SqlException ex)
-            {
-                Console.WriteLine($"Database error: {ex.Message}");
-                return null;
-            }
-            finally
-            {
-                sqlConnection.Close();
-            }
-
-
-        }
         public bool CheckMediaType(string mediaTypeName)
         {
             string query = "Select Id From MediaType Where Name = @MediaTypeName"; // please check if the mediatype exists

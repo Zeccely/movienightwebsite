@@ -46,8 +46,9 @@ namespace Movie_Night_Website.Service
 
         public void RegisterUser(string username, string password)
         {
-            string hashedPassword = _auth.HashPassword(password);
-            string salt = _auth.GenerateSalt(hashedPassword);
+            string salt = _auth.GenerateSalt();
+            string hashedPassword = _auth.HashPassword(password, salt);
+            
             _userRepo.AddUser(username, hashedPassword, salt);
         }
     }

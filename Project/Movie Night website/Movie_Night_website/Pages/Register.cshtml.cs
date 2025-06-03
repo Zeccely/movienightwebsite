@@ -9,6 +9,11 @@ namespace Movie_Night_website.Pages
     {
         private UserService userserve;
 
+        public RegisterModel(UserService userService)
+        {
+            userserve = userService;
+        }
+
 
 
         [BindProperty]

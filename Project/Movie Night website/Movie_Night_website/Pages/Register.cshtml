@@ -7,14 +7,14 @@
 <div class="glass-container">
 	<div class="Register-box">
 		<h2>Register</h2>
-		<form action="#" method="POST">
+		<form method="POST">
 
-			<input type="text" id="NewUsername" required placeholder="Username" />
-			<input type="password" id="NewPassword" required placeholder="Password" />
+			<input asp-for="NewUsername" type="text" id="NewUsername" required placeholder="Username" />
+			<input asp-for="NewPassword" type="password" id="NewPassword" required placeholder="Password" />
 			
-			
+			<button name="registerbtn" id="registerbtn" type="submit"> Register </button>
 		</form>
-		<button name="registerbtn" id="registerbtn" type="submit"> Register </button>
+		
 		<p>Already have an account? <a href="/Login" id="register">Go to Login</a> </p>
 
 	</div>

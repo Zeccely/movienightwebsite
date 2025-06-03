@@ -10,15 +10,15 @@ namespace Movie_Night_Website.Service
     public class AuthenticationService : IAuthentication
     {
 
-        public string GenerateSalt(string password)
+        public string GenerateSalt()
         {
             string salt = BCrypt.Net.BCrypt.GenerateSalt(13);
             return salt;
         }
 
-        public string HashPassword(string userPassword)
+        public string HashPassword(string userPassword, string salt)
         {
-            string hash = BCrypt.Net.BCrypt.HashPassword(userPassword);
+            string hash = BCrypt.Net.BCrypt.HashPassword(userPassword, salt);
             return hash;
         }
 
