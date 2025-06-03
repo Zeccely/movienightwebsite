@@ -24,7 +24,7 @@ namespace Movie_Night_Website.DataAccess.Data
 
         public bool CheckMediaType(string mediaTypeName)
         {
-            string query = "Select Id From MediaType Where Name = @MediaTypeName"; // please check if the mediatype exists
+            string query = "Select Id From MediaTypes Where Name = @MediaTypeName"; // please check if the mediatype exists
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
 
             try
@@ -79,7 +79,7 @@ namespace Movie_Night_Website.DataAccess.Data
 
         public int GetMediaTypeID(string movieName)
         {   
-            string query = "Select MediaTypeId from Media m INNER JOIN MediaType mt ON m.MediaTypeId = mt.Id Where m.Title = @MovieName "; // select the mediatypeId for the movie I added pls
+            string query = "Select MediaTypeId from Media m INNER JOIN MediaTypes mt ON m.MediaTypeId = mt.Id Where m.Title = @MovieName "; // select the mediatypeId for the movie I added pls
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
             try
             {

@@ -28,6 +28,7 @@ namespace Movie_Night_website.Services
             {
                 _mediaRepository.AddMediaType(mediaTypeText);
             }
+           
 
             mediaTypeId = _mediaRepository.GetMediaTypeID(mediaTypeText);
 

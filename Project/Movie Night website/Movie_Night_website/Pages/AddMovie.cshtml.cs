@@ -2,11 +2,12 @@ using System.Data.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using Movie_Night_website.Services;
 
 namespace Movie_Night_website.Pages
 {
-    [Authorize]
+    
     public class AddMovieModel : PageModel
     {
         private readonly MediaService _mediaService;
@@ -27,9 +28,12 @@ namespace Movie_Night_website.Pages
 
         public int UserID { get; set; }
 
+        public int forceUserID = 2;
+
         public void OnPost()
         {
-            _mediaService.AddMediaToDB(Title, TrailerURL, MediaType, UserID);
+            _mediaService.AddMediaToDB(Title, TrailerURL, MediaType, forceUserID);
+            
         }
 
         public void OnGet() 
