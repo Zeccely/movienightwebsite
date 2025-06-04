@@ -10,11 +10,13 @@ namespace Movie_Night_Website.Domain.Interfaces
     {
         void AddMedia(string title, string trailerURL, int mediatypeID, int userID);
 
-        int GetMediaTypeID(string name);
+        int GetMediaTypeIDFromMovie(string name);
 
         bool CheckMediaType(string mediaTypeName);
 
         void AddMediaType(string mediaTypeName);
+
+        int GetMediaTypeID(string mediaTypeName);
         
 
 

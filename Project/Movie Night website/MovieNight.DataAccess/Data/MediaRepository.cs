@@ -77,7 +77,7 @@ namespace Movie_Night_Website.DataAccess.Data
 
         }
 
-        public int GetMediaTypeID(string movieName)
+        public int GetMediaTypeIDFromMovie(string movieName)
         {   
             string query = "Select MediaTypeId from Media m INNER JOIN MediaTypes mt ON m.MediaTypeId = mt.Id Where m.Title = @MovieName "; // select the mediatypeId for the movie I added pls
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
@@ -104,9 +104,39 @@ namespace Movie_Night_Website.DataAccess.Data
                 sqlConnection.Close();
             }
         }
+
+        public int GetMediaTypeID(string mediaTypeName)
+        {
+            string query = "Select Id from MediaTypes where Name = @MediaTypeName";
+            using SqlConnection sqlConnection = new SqlConnection(connectionString);
+            try
+            {
+                sqlConnection.Open();
+                using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@MediaTypeName", mediaTypeName);
+                using SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    return reader.GetInt32(0);
+
+                }
+                else
+                {
+                    return 0;
+                }
+
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+        }
+
         public void AddMedia(string title, string trailerURL, int mediatypeID, int userID)
         {
-            string query = $"Insert into Media (Title, TrailerURL, MediaTypeID, UserID) Values (@Title, @TrailerURL, @MediaTypeID, UserID)";
+            string query = $"Insert into Media (Title, TrailerURL, MediaTypeId, UserId) Values (@Title, @TrailerURL, @MediaTypeID, @UserID)";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
             try
             {

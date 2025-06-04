@@ -22,9 +22,9 @@ namespace Movie_Night_Website.Service
             return hash;
         }
 
-        public bool VerifyPassword(string userpassword, string hashedpassword)
+        public bool VerifyPassword(string userpassword , string hashedpassword )
         {
-            return BCrypt.Net.BCrypt.EnhancedVerify(userpassword, hashedpassword);
+            return BCrypt.Net.BCrypt.Verify(userpassword, hashedpassword); 
         }
     }
 }

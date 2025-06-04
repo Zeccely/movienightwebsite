@@ -24,8 +24,14 @@ namespace Movie_Night_website.Services
             return 0;
         }
 
-        public void EvaluateVotes(Media media) { }
+        public void EvaluateVotes(Media media) 
+        {
 
-        public void UserVoteCheck(User user, Media media) { }
+        }
+
+        public void UserVoteCheck(User user, Media media) 
+        {
+
+        }
     }
 }

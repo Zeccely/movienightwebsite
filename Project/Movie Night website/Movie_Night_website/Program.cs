@@ -47,16 +47,7 @@ builder.Services.AddAuthentication("MyCookieAuth")
 
 builder.Services.AddAuthorization();
 
-
-
 var app = builder.Build();
-
-
-
-
-
-
-
 
 
 // Configure the HTTP request pipeline.
@@ -71,10 +62,11 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseAuthorization();
-
 app.UseSession();
 
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.MapStaticAssets();
 

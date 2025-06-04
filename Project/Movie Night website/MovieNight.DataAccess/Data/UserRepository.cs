@@ -46,7 +46,7 @@ namespace Movie_Night_Website.DataAccess.Data
         public User GetUser(string username)
         {
             User fetchedUser = null;
-            string query = "Select Username, Password from Users where Username = @username";
+            string query = "Select Id, Username, HashedPassword, Salt from Users where Username = @username";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
 
             try
@@ -62,9 +62,15 @@ namespace Movie_Night_Website.DataAccess.Data
                     string dbusername = reader.GetString(1);
                     string dbhashpassword = reader.GetString(2);
                     string dbsalt = reader.GetString(3);
-                    Role dbrole = (Role)Enum.Parse(typeof(Role), dbusername);
 
-                    return fetchedUser = new User(Id, dbusername, dbhashpassword, dbrole);
+                    if (dbusername != "Prawr")
+                    {
+                        return fetchedUser = new User(Id, dbusername, dbhashpassword, Role.Regular);
+                    }
+                    else 
+                    {
+                        return fetchedUser = new User(Id, dbusername,dbhashpassword, Role.Organizer);
+                    }
 
                 }
                 return null;
