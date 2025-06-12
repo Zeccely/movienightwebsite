@@ -30,7 +30,7 @@ namespace Movie_Night_website.Services
             }
             else
             {
-                Console.WriteLine("That did not work");
+                Console.WriteLine("That did not work or exists");
             }
            
 

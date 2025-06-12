@@ -1,4 +1,22 @@
 ﻿@page
 @model Movie_Night_website.Pages.VoteModel
+
+<form method="post">
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">Media Title</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">User who submitted movie</h6>
+        <a href="#">youtube trailer URL</a>
+        <input type="checkbox" id="VoteYes" name="VoteYes" />
+        <input type="checkbox" id="VoteNo" name="VoteNo" />
+        <label for="VoteYes">Yes</label>
+        <label for="VoteNo">No</label>
+        <button type="submit">Submit Vote</button>
+
+    </div>
+</div>
+</form>
+
 @{
+
 }

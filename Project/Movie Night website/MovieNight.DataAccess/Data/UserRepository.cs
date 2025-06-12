@@ -16,7 +16,7 @@ namespace Movie_Night_Website.DataAccess.Data
    
         public UserRepository (IConfiguration configuration)
         {
-            connectionString = configuration.GetConnectionString("HomeConnection");
+            connectionString = configuration.GetConnectionString("LaptopConnection");
         }
 
         public void AddUser(string username, string hashpassword, string salt)
@@ -46,7 +46,7 @@ namespace Movie_Night_Website.DataAccess.Data
         public User GetUser(string username)
         {
             User fetchedUser = null;
-            string query = "Select Id, Username, HashedPassword, Salt from Users where Username = @username";
+            string query = "Select Id, Username, HashedPassword, Salt, Role from Users where Username = @username";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
 
             try
@@ -61,19 +61,14 @@ namespace Movie_Night_Website.DataAccess.Data
                     int Id = reader.GetInt32(0);
                     string dbusername = reader.GetString(1);
                     string dbhashpassword = reader.GetString(2);
-                    string dbsalt = reader.GetString(3);
+                    string salt = reader.GetString(3);
+                    string dbrole = reader.GetString(4);
 
-                    if (dbusername != "Prawr")
-                    {
-                        return fetchedUser = new User(Id, dbusername, dbhashpassword, Role.Regular);
-                    }
-                    else 
-                    {
-                        return fetchedUser = new User(Id, dbusername,dbhashpassword, Role.Organizer);
-                    }
+                    fetchedUser = new User(Id, dbusername, dbhashpassword, Enum.Parse<Role>(dbrole));
+
 
                 }
-                return null;
+                return fetchedUser;
             }
             catch (SqlException ex)
             {

@@ -29,7 +29,7 @@ namespace Movie_Night_website.Pages
         {
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             User loggingin = userService.Login(Username, Password);
 
@@ -37,9 +37,22 @@ namespace Movie_Night_website.Pages
             {
                 HttpContext.Session.SetInt32("UserID", loggingin.UserID);
                 HttpContext.Session.SetString("Username", loggingin.Username);
+                HttpContext.Session.SetString("Role", loggingin.Role.ToString());
 
-              
-                return RedirectToPage("/Index");
+                List<Claim> claims = new List<Claim>
+                {
+                    new Claim (ClaimTypes.Name, loggingin.Username),
+                    new Claim (ClaimTypes.NameIdentifier, loggingin.UserID.ToString()),
+                    new Claim (ClaimTypes.Role, loggingin.Role.ToString())
+                };
+
+                ClaimsIdentity identity = new ClaimsIdentity(claims, "MyCookieAuth");
+                ClaimsPrincipal principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync("MyCookieAuth", principal);
+
+
+                return RedirectToPage("/Home");
             }
             else
             {

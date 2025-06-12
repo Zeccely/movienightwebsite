@@ -19,7 +19,7 @@ namespace Movie_Night_Website.DataAccess.Data
 
         public MediaRepository(IConfiguration configuration)
         {
-            connectionString = configuration.GetConnectionString("HomeConnection");
+            connectionString = configuration.GetConnectionString("LaptopConnection");
         }
 
         public bool CheckMediaType(string mediaTypeName)

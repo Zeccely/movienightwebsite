@@ -7,7 +7,7 @@ using Movie_Night_website.Services;
 
 namespace Movie_Night_website.Pages
 {
-    
+    [Authorize]
     public class AddMovieModel : PageModel
     {
         private readonly MediaService _mediaService;
@@ -26,13 +26,18 @@ namespace Movie_Night_website.Pages
         [BindProperty]
         public string MediaType { get; set; }
 
-        public int UserID { get; set; }
+        public int? UserID { get; set; } 
 
-        public int forceUserID = 2;
 
         public void OnPost()
         {
-            _mediaService.AddMediaToDB(Title, TrailerURL, MediaType, forceUserID);
+            UserID = HttpContext.Session.GetInt32("UserID");
+            
+            if (UserID != null)
+            {
+                _mediaService.AddMediaToDB(Title, TrailerURL, MediaType, UserID.Value);
+            }
+            
             
         }
 

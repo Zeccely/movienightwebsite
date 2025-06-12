@@ -1,9 +1,16 @@
 ﻿using Movie_Night_website.Models;
+using Movie_Night_Website.Domain.Interfaces;
 
 namespace Movie_Night_website.Services
 {
-    public class VotingService
+    public class VotingService : IVotingService
     {
+        private IMediaRepository _mediaRepository;
+
+        public VotingService(IMediaRepository mediaRepository)
+        {
+            _mediaRepository = mediaRepository;
+        }
         public void CastVote()
         {
 
