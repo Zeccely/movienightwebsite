@@ -3,7 +3,7 @@ using Movie_Night_Website.Domain.Interfaces;
 
 namespace Movie_Night_website.Services
 {
-    public class VotingService : IVotingService
+    public class VotingService : IMediaVoteRepository
     {
         private IMediaRepository _mediaRepository;
 
@@ -14,21 +14,6 @@ namespace Movie_Night_website.Services
         public void CastVote()
         {
 
-        }
-
-        public void CastVeto()
-        {
-
-        }
-
-        public int GetVotes(Media media)
-        {
-            return 0;
-        }
-
-        public int GetVetoes(Media media)
-        {
-            return 0;
         }
 
         public void EvaluateVotes(Media media) 

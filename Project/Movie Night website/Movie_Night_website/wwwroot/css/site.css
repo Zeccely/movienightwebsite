@@ -29,3 +29,39 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+.thumbs-checkbox {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+}
+
+.thumbs-up {
+    display: none;
+}
+
+.thumbs-down {
+    display: none;
+}
+
+input[type="checkbox"]:checked + .thumbs-checkbox .thumbs-up{
+    display: block;
+}
+
+input[type="checkbox"]:checked + .thumbs-checkbox .thumbs-down {
+    display: none;
+}
+
+input[type="checkbox"]:not(:checked) + .thumbs-checkbox .thumbs-up {
+    display: none;
+}
+
+input[type="checkbox"]:not(:checked) + .thumbs-checkbox .thumbs-down {
+    display: block;
+}

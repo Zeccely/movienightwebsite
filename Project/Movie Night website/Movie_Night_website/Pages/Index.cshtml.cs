@@ -9,11 +9,11 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Movie_Night_website.Pages
 {
-    public class LoginModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly UserService userService;
         
-        public LoginModel(UserService userService)
+        public IndexModel(UserService userService)
         {
             this.userService = userService;
         }
@@ -25,8 +25,13 @@ namespace Movie_Night_website.Pages
         [BindProperty]
         public string Password { get; set; }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            if (HttpContext.User is not null)
+            {
+                return RedirectToPage("/Home");
+            }
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -35,9 +40,9 @@ namespace Movie_Night_website.Pages
 
             if (loggingin != null)
             {
-                HttpContext.Session.SetInt32("UserID", loggingin.UserID);
-                HttpContext.Session.SetString("Username", loggingin.Username);
-                HttpContext.Session.SetString("Role", loggingin.Role.ToString());
+                //HttpContext.Session.SetInt32("UserID", loggingin.UserID);
+                //HttpContext.Session.SetString("Username", loggingin.Username);
+                //HttpContext.Session.SetString("Role", loggingin.Role.ToString());
 
                 List<Claim> claims = new List<Claim>
                 {
@@ -56,7 +61,7 @@ namespace Movie_Night_website.Pages
             }
             else
             {
-                return RedirectToPage("/Login");
+                return Page();
             }
 
 

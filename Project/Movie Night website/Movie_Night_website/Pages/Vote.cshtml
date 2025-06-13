@@ -7,10 +7,16 @@
         <h5 class="card-title">Media Title</h5>
         <h6 class="card-subtitle mb-2 text-body-secondary">User who submitted movie</h6>
         <a href="#">youtube trailer URL</a>
-        <input type="checkbox" id="VoteYes" name="VoteYes" />
-        <input type="checkbox" id="VoteNo" name="VoteNo" />
-        <label for="VoteYes">Yes</label>
-        <label for="VoteNo">No</label>
+
+            <label>
+                <input type="checkbox" id="thumbs-checkbox">
+                <span class="thumbs-checkbox">
+                    <span class="thumbs-up">&#128076;</span>
+                    <span class="thumbs-down">&#128078;</span>
+                </span>
+            </label>
+        <input type="hidden" id="MovieId" name="MovieId" value="123" />
+
         <button type="submit">Submit Vote</button>
 
     </div>

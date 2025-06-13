@@ -19,7 +19,7 @@ namespace Movie_Night_website.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-
+            throw new NotImplementedException();
         }
     }
 }

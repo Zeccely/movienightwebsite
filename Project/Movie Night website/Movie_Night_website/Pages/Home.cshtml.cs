@@ -7,9 +7,9 @@ using System.Data.Entity;
 namespace Movie_Night_website.Pages
 {
     [Authorize]
-    public class IndexModel : PageModel
+    public class HomeModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<HomeModel> _logger;
 
      
 

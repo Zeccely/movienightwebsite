@@ -1,4 +1,5 @@
 using System.Data.Entity;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -31,11 +32,12 @@ namespace Movie_Night_website.Pages
 
         public void OnPost()
         {
-            UserID = HttpContext.Session.GetInt32("UserID");
+            string? UserID = HttpContext.GetClaimValue(ClaimTypes.NameIdentifier);
             
             if (UserID != null)
             {
-                _mediaService.AddMediaToDB(Title, TrailerURL, MediaType, UserID.Value);
+                _mediaService.AddMediaToDB(Title, TrailerURL, MediaType, Convert.ToInt32(UserID));
+                //clear text boxes pls
             }
             
             

@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages(options => 
 {
-    options.Conventions.AddPageRoute("/Login", "");
+    //options.Conventions.AddPageRoute("/Login", "");
 });
 
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
@@ -31,7 +31,7 @@ builder.Services.AddScoped<MediaService>();
 
 builder.Services.AddDistributedMemoryCache();
 
-builder.Services.AddSession(options =>
+builder.Services.AddSession(options =>     //I may not need this
 {
     options.IdleTimeout = TimeSpan.FromDays(1);
     options.Cookie.HttpOnly = true;
@@ -41,7 +41,7 @@ builder.Services.AddSession(options =>
 builder.Services.AddAuthentication("MyCookieAuth")
     .AddCookie("MyCookieAuth", options =>
     {
-        options.LoginPath = "/Login";
+        options.LoginPath = "/Index";
         options.LogoutPath = "/Logout";
         options.Cookie.Name = "MovieNightAuth";
         options.ExpireTimeSpan = TimeSpan.FromDays(1); 
@@ -70,10 +70,6 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-//app.MapGet("/", ctx => {                                 // this will finally stop the indexing issue. I tried with authorize only but it was very weird
-//    ctx.Response.Redirect("/Login");
-//    return Task.CompletedTask;
-//});
 
 app.MapStaticAssets();
 
