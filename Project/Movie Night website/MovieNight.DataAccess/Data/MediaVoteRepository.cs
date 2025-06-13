@@ -19,15 +19,20 @@ namespace Movie_Night_Website.DataAccess.Data
             connectionString = configuration.GetConnectionString("LaptopConnection");
         }
 
-        public int EvaluateVotes(int mediaId) //count the votes on this movie
+        public int GetPositiveVotes(int mediaId) //count the votes on this movie
         {
-            string query = "Select Liked from UserVotes where Media_Id = @MediaId";
+            int count = 0;
+            string query = "Select Count(*) from UserVotes where Media_Id = @MediaId and Liked = 1";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
 
             try
             {
                 sqlConnection.Open();
-
+                using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@MediaId", mediaId);
+                sqlConnection.Open();
+                count = (int)sqlCommand.ExecuteScalar();
+                return count;
             }
             catch (Exception ex)
             {
@@ -41,7 +46,35 @@ namespace Movie_Night_Website.DataAccess.Data
 
         }
 
-        public void CastVote(int userID, int mediaID, bool vote)
+        public int GetNegativeVotes(int mediaId)
+        {
+            int count = 0;
+            string query = "Select Count(*) from UserVotes where Media_Id = @MediaId and Liked = 0";
+            using SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+            try
+            {
+                sqlConnection.Open();
+                using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@MediaId", mediaId);
+                sqlConnection.Open();
+                count = (int)sqlCommand.ExecuteScalar();
+                return count;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+            return 0;
+        }
+
+      
+
+        public void CastVote(int userID, int mediaID, bool vote) //need to rethink this because bool needs to be true or false here
         {
             string query = "Insert into UserVote (User_Id, Media_Id, Liked) Values (@UserID, @MediaID, @Vote) ";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
@@ -52,6 +85,30 @@ namespace Movie_Night_Website.DataAccess.Data
                 sqlCommand.Parameters.AddWithValue("@UserID", userID);
                 sqlCommand.Parameters.AddWithValue("@MediaID", mediaID);
                 sqlCommand.Parameters.AddWithValue("@Liked", vote);
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public void SetFinalVerdict(int mediaId, bool verdict)
+        {
+            string query = "Update Media Set FinalVerdict = @verdict where Id = @mediaId";
+            using SqlConnection sqlConnection = new SqlConnection(connectionString);
+            
+
+            try
+            {
+                sqlConnection.Open();
+                using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@verdict", verdict);
+                sqlCommand.Parameters.AddWithValue("@mediaId", mediaId);
                 sqlCommand.ExecuteNonQuery();
             }
             catch (Exception ex)

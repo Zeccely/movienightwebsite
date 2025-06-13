@@ -11,9 +11,14 @@ namespace Movie_Night_Website.Domain.Interfaces
     {
         void CastVote(int userId, int mediaId, bool vote); //add vote from user to this media
 
-        int EvaluateVotes(int mediaId); //calculate votes on this media
+        int GetPositiveVotes(int mediaId); //calculate votes on this media
+
+        int GetNegativeVotes(int mediaId);
+
+        void SetFinalVerdict(int mediaId, bool verdict);
 
         void UserVoteCheck(int userId, int mediaId); //did user vote on this?
+
 
     }
 }

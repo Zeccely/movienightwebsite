@@ -3,27 +3,33 @@ using Movie_Night_Website.Domain.Interfaces;
 
 namespace Movie_Night_website.Services
 {
-    public class VotingService : IMediaVoteRepository
+    public class VotingService 
     {
-        private IMediaRepository _mediaRepository;
+        private IMediaVoteRepository _mediaVoteRepository;
 
-        public VotingService(IMediaRepository mediaRepository)
+        public VotingService(IMediaVoteRepository mediaVoteRepository)
         {
-            _mediaRepository = mediaRepository;
+            _mediaVoteRepository = mediaVoteRepository;
         }
-        public void CastVote()
+        public void CastVote(int userId, int movieId, bool vote)
         {
-
-        }
-
-        public void EvaluateVotes(Media media) 
-        {
-
+            _mediaVoteRepository.CastVote(userId, movieId, vote);
         }
 
-        public void UserVoteCheck(User user, Media media) 
+        public void EvaluateVotes(int mediaId)
         {
+            int positiveVotes = _mediaVoteRepository.GetPositiveVotes(mediaId);
+            int negativeVotes = _mediaVoteRepository.GetNegativeVotes(mediaId);
 
+            if (positiveVotes > negativeVotes)
+            {
+                _mediaVoteRepository.SetFinalVerdict(mediaId, true);
+                
+            }
+            else if (negativeVotes > positiveVotes)
+            {
+                _mediaVoteRepository.SetFinalVerdict(mediaId, false);
+            }
         }
     }
 }
