@@ -29,7 +29,8 @@ namespace Movie_Night_website.Models
             TrailerURL = trailerURL;
             Title = title;
             MediaTypeID = mediaTypeId;
-            contributor = UserID;
+            UserID = contributor;
+            
         }
 
 

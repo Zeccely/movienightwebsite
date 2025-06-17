@@ -82,7 +82,7 @@ namespace Movie_Night_Website.DataAccess.Data
                 return;
             }
 
-            string query = "Insert into UserVote (User_Id, Media_Id, Liked) Values (@UserID, @MediaID, @Vote) ";
+            string query = "Insert into UserVotes (User_Id, Media_Id, Liked) Values (@UserID, @MediaID, @Vote) ";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
 
             try
@@ -91,7 +91,7 @@ namespace Movie_Night_Website.DataAccess.Data
                 using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@UserID", userID);
                 sqlCommand.Parameters.AddWithValue("@MediaID", mediaID);
-                sqlCommand.Parameters.AddWithValue("@Liked", vote);
+                sqlCommand.Parameters.AddWithValue("@Vote", vote);
                 sqlCommand.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -130,7 +130,7 @@ namespace Movie_Night_Website.DataAccess.Data
 
         public bool UserVoteCheck(int userId, int mediaId)
         {
-            string query = "Select * from UserVote where UserId = @userId and MediaId = @mediaId";
+            string query = "Select * from UserVotes where User_Id = @userId and Media_Id = @mediaId";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
 
             try

@@ -18,17 +18,22 @@ namespace Movie_Night_website.Pages
         public string YoutubeLink { get; set; }
         public List<Media> MediaList { get; set; }
 
-        private VotingService _votingService;
-        
+        public VotingService _votingService;
+        public VoteModel(VotingService votingService)
+        {
+            _votingService = votingService;
+        }
+
         public void OnGet()
         {
             int.TryParse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int UserId);
-            MediaList = _votingService.DisplayMedia();
+            MediaList = _votingService.DisplayMedia(); 
         }
 
-        public async Task<IActionResult> OnPostAsync(int movieId, bool vote)
+        public async Task<IActionResult> OnPostAsync(int mediaId, bool vote)
         {
-            _votingService.CastVote(UserId, movieId, vote);
+            int.TryParse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int UserId);
+            _votingService.CastVote(UserId, mediaId, vote);
             return RedirectToPage();
         }
     }

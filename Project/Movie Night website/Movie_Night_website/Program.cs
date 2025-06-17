@@ -19,9 +19,10 @@ builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMediaRepository, MediaRepository>();
 builder.Services.AddScoped<IAuthentication, AuthenticationService>();
-
+builder.Services.AddScoped<IMediaVoteRepository, MediaVoteRepository>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<MediaService>();
+builder.Services.AddScoped<VotingService>();
 
 builder.Services.AddDistributedMemoryCache();
 

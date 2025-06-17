@@ -173,11 +173,11 @@ namespace Movie_Night_Website.DataAccess.Data
 
                 while (reader.Read())
                 {
-                    int Id = reader.GetInt32(1);
-                    int Submittedby = reader.GetInt32(2);
-                    string Title = reader.GetString(3);
-                    string TrailerURL = reader.GetString(4);
-                    int MediaTypeId = reader.GetInt32(5);
+                    int Id = reader.GetInt32(0);
+                    int Submittedby = reader.GetInt32(1); 
+                    string Title = reader.GetString(2);
+                    string TrailerURL = reader.GetString(3);
+                    int MediaTypeId = reader.GetInt32(4);
 
                     Media NewMedia = new(Id, TrailerURL, Title, MediaTypeId, Submittedby);
 
