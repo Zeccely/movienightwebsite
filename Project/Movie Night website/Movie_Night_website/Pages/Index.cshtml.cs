@@ -6,11 +6,15 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace Movie_Night_website.Pages
 {
+    [AllowAnonymous]
     public class IndexModel : PageModel
     {
+        
         private readonly UserService userService;
         
         public IndexModel(UserService userService)
@@ -27,7 +31,7 @@ namespace Movie_Night_website.Pages
 
         public async Task<IActionResult> OnGet()
         {
-            if (HttpContext.User is not null)
+            if (HttpContext.User.Identity?.IsAuthenticated == true )
             {
                 return RedirectToPage("/Home");
             }

@@ -6,10 +6,12 @@ namespace Movie_Night_website.Services
     public class VotingService 
     {
         private IMediaVoteRepository _mediaVoteRepository;
+        private readonly IMediaRepository _mediaRepository;
 
-        public VotingService(IMediaVoteRepository mediaVoteRepository)
+        public VotingService(IMediaVoteRepository mediaVoteRepository, IMediaRepository mediaRepository)
         {
             _mediaVoteRepository = mediaVoteRepository;
+            _mediaRepository = mediaRepository;
         }
         public void CastVote(int userId, int movieId, bool vote)
         {
@@ -30,6 +32,12 @@ namespace Movie_Night_website.Services
             {
                 _mediaVoteRepository.SetFinalVerdict(mediaId, false);
             }
+        }
+
+        public List<Media> DisplayMedia() //will rethink this later squint
+        {
+            List<Media> mediaList = _mediaRepository.GetAllMedia();
+            return mediaList;
         }
     }
 }

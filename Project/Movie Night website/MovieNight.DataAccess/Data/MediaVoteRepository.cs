@@ -74,10 +74,17 @@ namespace Movie_Night_Website.DataAccess.Data
 
       
 
-        public void CastVote(int userID, int mediaID, bool vote) //need to rethink this because bool needs to be true or false here
+        public void CastVote(int userID, int mediaID, bool vote) //should I bool this
         {
+            
+            if (UserVoteCheck(userID, mediaID))
+            {
+                return;
+            }
+
             string query = "Insert into UserVote (User_Id, Media_Id, Liked) Values (@UserID, @MediaID, @Vote) ";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
+
             try
             {
                 sqlConnection.Open();
@@ -121,9 +128,31 @@ namespace Movie_Night_Website.DataAccess.Data
             }
         }
 
-        public void UserVoteCheck(int userId, int mediaId)
+        public bool UserVoteCheck(int userId, int mediaId)
         {
-            //did user vote on media?
+            string query = "Select * from UserVote where UserId = @userId and MediaId = @mediaId";
+            using SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+            try
+            {
+                sqlConnection.Open();
+                using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@userId", userId);
+                sqlCommand.Parameters.AddWithValue("@mediaId", mediaId);
+                
+
+                using SqlDataReader reader = sqlCommand.ExecuteReader();
+                return reader.HasRows; 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+            return false;
         }
     }
 }

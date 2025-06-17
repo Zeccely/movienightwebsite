@@ -17,7 +17,7 @@ namespace Movie_Night_Website.Domain.Interfaces
 
         void SetFinalVerdict(int mediaId, bool verdict);
 
-        void UserVoteCheck(int userId, int mediaId); //did user vote on this?
+        bool UserVoteCheck(int userId, int mediaId); //did user vote on this?
 
 
     }

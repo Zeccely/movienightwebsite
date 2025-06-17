@@ -11,10 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 
-builder.Services.AddRazorPages(options => 
-{
-    //options.Conventions.AddPageRoute("/Login", "");
-});
+builder.Services.AddRazorPages();
+
 
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
@@ -22,16 +20,12 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMediaRepository, MediaRepository>();
 builder.Services.AddScoped<IAuthentication, AuthenticationService>();
 
-
-
-
-
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<MediaService>();
 
 builder.Services.AddDistributedMemoryCache();
 
-builder.Services.AddSession(options =>     //I may not need this
+builder.Services.AddSession(options =>     
 {
     options.IdleTimeout = TimeSpan.FromDays(1);
     options.Cookie.HttpOnly = true;

@@ -159,6 +159,44 @@ namespace Movie_Night_Website.DataAccess.Data
 
         }
 
+        public List<Media> GetAllMedia()
+        {
+            List<Media> allMedia = new List<Media>();
+            string query = "Select * from Media";
+            using SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+            try
+            {
+                sqlConnection.Open();
+                using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                using SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    int Id = reader.GetInt32(1);
+                    int Submittedby = reader.GetInt32(2);
+                    string Title = reader.GetString(3);
+                    string TrailerURL = reader.GetString(4);
+                    int MediaTypeId = reader.GetInt32(5);
+
+                    Media NewMedia = new(Id, TrailerURL, Title, MediaTypeId, Submittedby);
+
+                    allMedia.Add(NewMedia);
+
+                }
+                return allMedia;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
 
     }
 }
