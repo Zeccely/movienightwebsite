@@ -16,7 +16,7 @@ namespace Movie_Night_Website.DataAccess.Data
    
         public UserRepository (IConfiguration configuration)
         {
-            connectionString = configuration.GetConnectionString("LaptopConnection");
+            connectionString = configuration.GetConnectionString("HomeConnection");
         }
 
         public void AddUser(string username, string hashpassword, string salt)
@@ -73,6 +73,43 @@ namespace Movie_Night_Website.DataAccess.Data
             catch (SqlException ex)
             {
                 Console.WriteLine($"Database error: {ex.Message}");
+                return null;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+        public User GetUserById(int Id)
+        {
+            User fetchedUser = null;
+            string query = "Select Id, Username, HashedPassword, Salt, Role from Users where Id = @Id";
+            using SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+            try
+            {
+                sqlConnection.Open();
+                using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@Id", Id);
+
+                using SqlDataReader reader = sqlCommand.ExecuteReader();
+                if (reader.Read())
+                {
+                    
+                    string dbusername = reader.GetString(1);
+                    string dbhashpassword = reader.GetString(2);
+                    string salt = reader.GetString(3);
+                    string dbrole = reader.GetString(4);
+
+                    fetchedUser = new User(Id, dbusername, dbhashpassword, Enum.Parse<Role>(dbrole));
+
+
+                }
+                return fetchedUser;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
                 return null;
             }
             finally

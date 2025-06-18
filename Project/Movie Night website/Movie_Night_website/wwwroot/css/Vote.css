@@ -1,21 +1,12 @@
 ﻿body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: rgba(255, 238, 210, 1);
-    background-size: cover;
-    background-image: url('../img/background.gif');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
+
 }
 
-.MovieCard {
+.MediaCard {
+    display: flex;
     width: 200px;
     height: 250px;
+    margin: 20px;
     position: relative;
     z-index: 1;
     background: rgba(255,255,255,0.1);
@@ -23,3 +14,43 @@
     border-radius: 10px;
     border: 1px solid #fff;
 }
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1;
+}
+
+
+.VoteDisplay {
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: start;
+    padding: 20px;
+}
+
+.card-title{
+    text-align: center;
+}
+
+.contributor{
+    text-align: center; 
+}
+
+button {
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
+label {
+    margin-top: auto;
+}
+
+
+
+
+

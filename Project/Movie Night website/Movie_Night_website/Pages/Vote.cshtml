@@ -1,22 +1,30 @@
 ﻿@page
 @model Movie_Night_website.Pages.VoteModel
+@{
+    
+    <link rel="stylesheet" href="~/css/Vote.css" />
 
+}
+<div class="VoteDisplay">
 @foreach (var media in Model.MediaList)
 {
-    <form method="post">
-        <div class="MediaCard" style="width: 18rem;">
+    <form class="fullcard" method="post">
+
+        <div class="MediaCard">
 
             <div class="card-body">
                 <h5 class="card-title">@media.Title</h5>
+                <h6 class="contributor">@media.Contributor.Username</h6>
                 <a href="@media.TrailerURL" target="_blank">Watch Trailer</a>
 
-                <label>
-                    <input type="checkbox" id="thumbs-checkbox">
-                    <span class="thumbs-checkbox">
-                        <span class="thumbs-up" value="true">&#128076;</span>
-                        <span class="thumbs-down" value="false">&#128078;</span>
-                    </span>
-                </label>
+                    <label class="custom-checkbox">
+                        <input asp-for="UserVote" type="hidden" name="Vote" id="Vote" value="false" />
+                        <input type="checkbox" id="checkbox">
+                        <span class="custom-checkbox">
+                            <span class="thumbs-up">&#128076;</span>
+                            <span class="thumbs-down">&#128078;</span>
+                        </span>
+                    </label>
 
                 <input type="hidden" id="MediaId" name="MediaId" value="@media.MediaID" />
 
@@ -26,6 +34,7 @@
         </div>
     </form>
 }
+</div>
 @{
 
 }

@@ -12,5 +12,7 @@ namespace Movie_Night_Website.Domain.Interfaces
         
         void AddUser(string username, string hashpassword, string salt);
         User GetUser(string username);
+
+        User GetUserById(int id);
     }
 }

@@ -17,23 +17,32 @@ namespace Movie_Night_website.Pages
         public string MediaTitle { get; set; }
         public string YoutubeLink { get; set; }
         public List<Media> MediaList { get; set; }
+        public bool UserVote { get; set; }
 
         public VotingService _votingService;
-        public VoteModel(VotingService votingService)
+        public readonly UserService _userService;
+        public VoteModel(VotingService votingService, UserService userService)
         {
             _votingService = votingService;
+            _userService = userService;
         }
 
         public void OnGet()
         {
             int.TryParse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int UserId);
-            MediaList = _votingService.DisplayMedia(); 
+            MediaList = _votingService.DisplayMedia();
+
+            foreach (Media media in MediaList)
+            {
+                User Submittedby = _userService.GetUserById(media.ContributorID);
+                media.Contributor = Submittedby;
+            }
         }
 
-        public async Task<IActionResult> OnPostAsync(int mediaId, bool vote)
+        public async Task<IActionResult> OnPostAsync(int mediaId)
         {
             int.TryParse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int UserId);
-            _votingService.CastVote(UserId, mediaId, vote);
+            _votingService.CastVote(UserId, mediaId, UserVote);
             return RedirectToPage();
         }
     }

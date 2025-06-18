@@ -19,7 +19,7 @@ namespace Movie_Night_Website.DataAccess.Data
 
         public MediaRepository(IConfiguration configuration)
         {
-            connectionString = configuration.GetConnectionString("LaptopConnection");
+            connectionString = configuration.GetConnectionString("HomeConnection");
         }
 
         public bool CheckMediaType(string mediaTypeName)
@@ -42,6 +42,11 @@ namespace Movie_Night_Website.DataAccess.Data
                 {
                     return false;
                 }
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex);
+                return false;
             }
 
             finally
@@ -136,7 +141,7 @@ namespace Movie_Night_Website.DataAccess.Data
 
         public void AddMedia(string title, string trailerURL, int mediatypeID, int userID)
         {
-            string query = $"Insert into Media (Title, TrailerURL, MediaTypeId, UserId) Values (@Title, @TrailerURL, @MediaTypeID, @UserID)";
+            string query = $"Insert into Media (Title, TrailerURL, MediaTypeId, UserId) Values (@Title, @TrailerURL, @MediaTypeID, @ContributorID)";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
             try
             {
@@ -145,7 +150,7 @@ namespace Movie_Night_Website.DataAccess.Data
                 sqlCommand.Parameters.AddWithValue("@Title", title);
                 sqlCommand.Parameters.AddWithValue("@TrailerURL", trailerURL);
                 sqlCommand.Parameters.AddWithValue("@MediaTypeID", mediatypeID);
-                sqlCommand.Parameters.AddWithValue("@UserID", userID);
+                sqlCommand.Parameters.AddWithValue("@ContributorID", userID);
                 sqlCommand.ExecuteNonQuery();
             }
             catch (SqlException ex)
@@ -196,6 +201,12 @@ namespace Movie_Night_Website.DataAccess.Data
                 sqlConnection.Close();
             }
         }
+        public List<Media> GetApprovedMedia()
+        {
+            string query = "Select M"; //grab all media where final verdict is 1 or True
+            return null;
+        }
+
 
 
     }

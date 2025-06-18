@@ -12,7 +12,7 @@ namespace Movie_Night_website.Models
 
         public MediaType MediaType { get; set; }
         public int MediaTypeID { get; set; }
-        public int UserID { get; set; }
+        public int ContributorID { get; set; }
         public User Contributor { get; set; }
 
         public Media (int mediaID, string trailerURL, string title, MediaType mediaType)
@@ -29,8 +29,7 @@ namespace Movie_Night_website.Models
             TrailerURL = trailerURL;
             Title = title;
             MediaTypeID = mediaTypeId;
-            UserID = contributor;
-            
+            ContributorID = contributor;
         }
 
 

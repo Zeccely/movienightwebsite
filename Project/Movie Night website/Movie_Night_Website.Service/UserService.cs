@@ -51,5 +51,10 @@ namespace Movie_Night_Website.Service
             
             _userRepo.AddUser(username, hashedPassword, salt);
         }
+
+        public User GetUserById(int id)
+        {
+            return _userRepo.GetUserById(id);
+        }
     }
 }

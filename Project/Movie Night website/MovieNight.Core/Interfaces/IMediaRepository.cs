@@ -21,6 +21,8 @@ namespace Movie_Night_Website.Domain.Interfaces
 
         List<Media> GetAllMedia();
 
+        List<Media> GetApprovedMedia();
+
 
 
 
