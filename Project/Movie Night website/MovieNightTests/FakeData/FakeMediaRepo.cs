@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Movie_Night_website.Models;
 using Movie_Night_Website.Domain.Interfaces;
 
-namespace Movie_Night_Website.DataAccess.Data
+namespace MovieNightTests.FakeData
 {
     public class FakeMediaRepo : IMediaRepository
     {

@@ -15,11 +15,15 @@ namespace Movie_Night_Website.DataAccess.Data
         private readonly string connectionString;
         public MovieNightRepository(IConfiguration configuration)
         {
-            connectionString = configuration.GetConnectionString("HomeConnection");
+            connectionString = configuration.GetConnectionString("LaptopConnection");
         }
         public void AddUserToMovieNight(int userId, int movieNightId)
         {
-            string query = "Insert into MovieAttendees (User_Id, MovieNight_Id) Values (@UserId, @MovieNightId) ";
+            string query = """
+                          Insert into MovieNight (Media_Id, DateOfEvent) Values (@Media_Id, @Datetime)
+                Set @Id = SCOPE_IDENTITY()
+                Insert into MovieAttendees (User_Id, MovieNight_Id) Values (@UserId, @Id)
+                """;
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
 
             try

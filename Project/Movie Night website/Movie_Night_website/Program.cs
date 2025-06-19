@@ -23,6 +23,7 @@ builder.Services.AddScoped<IMediaVoteRepository, MediaVoteRepository>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<MediaService>();
 builder.Services.AddScoped<VotingService>();
+builder.Services.AddScoped<IMovieNightRepository, MovieNightRepository>();
 
 builder.Services.AddDistributedMemoryCache();
 

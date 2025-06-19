@@ -8,7 +8,7 @@ using Movie_Night_website.Models;
 using Movie_Night_Website.Domain.Interfaces;
 using static System.Random;
 
-namespace Movie_Night_Website.DataAccess.Data
+namespace MovieNightTests.FakeData
 {
     public class FakeUserRepo : IUserRepository
     {

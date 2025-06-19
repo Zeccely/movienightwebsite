@@ -16,7 +16,7 @@ namespace Movie_Night_Website.DataAccess.Data
 
         public MediaVoteRepository(IConfiguration configuration)
         {
-            connectionString = configuration.GetConnectionString("HomeConnection");
+            connectionString = configuration.GetConnectionString("LaptopConnection");
         }
 
         public int GetPositiveVotes(int mediaId) //count the votes on this movie

@@ -10,7 +10,7 @@ namespace MovieNightTests
 
         public UserServiceTests() 
         {
-            _userServiceMock = new Mock
+            
         }
 
         [Fact]

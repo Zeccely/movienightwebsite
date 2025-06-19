@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Movie_Night_website.Models;
 using Movie_Night_Website.Domain.Interfaces;
 
@@ -13,10 +14,13 @@ namespace Movie_Night_Website.DataAccess.Data
     public class UserRepository : IUserRepository
     {
         private readonly string connectionString;
+        private readonly ILogger<UserRepository> logger;
 
-        public UserRepository(IConfiguration configuration)
+        public UserRepository(ILogger<UserRepository> logger ,IConfiguration configuration)
         {
-            connectionString = configuration.GetConnectionString("HomeConnection");
+            connectionString = configuration.GetConnectionString("LaptopConnection");
+            this.logger = logger;
+            logger.LogInformation("Repo created");
         }
 
         public void AddUser(string username, string hashpassword, string salt)
@@ -35,7 +39,7 @@ namespace Movie_Night_Website.DataAccess.Data
             }
             catch (SqlException ex)
             {
-                Console.WriteLine(ex.Message);
+                logger.LogError(ex.Message);
             }
             finally
             {
@@ -72,7 +76,7 @@ namespace Movie_Night_Website.DataAccess.Data
             }
             catch (SqlException ex)
             {
-                Console.WriteLine($"Database error: {ex.Message}");
+                logger.LogError($"Database error: {ex.Message}");
                 return null;
             }
             finally

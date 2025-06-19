@@ -18,7 +18,7 @@ namespace Movie_Night_website.Services
             _mediaVoteRepository.CastVote(userId, movieId, vote);
         }
 
-        public void EvaluateVotes(int mediaId)
+        public void EvaluateVotes(int mediaId) //unit test this
         {
             int positiveVotes = _mediaVoteRepository.GetPositiveVotes(mediaId);
             int negativeVotes = _mediaVoteRepository.GetNegativeVotes(mediaId);
