@@ -2,6 +2,7 @@
 {
     public class User
     {
+        public List<User> Users { get; set; } = new List<User>();
         public int UserID { get; set; }
 
         public string Username { get; set; }
@@ -15,6 +16,13 @@
             UserID = userID;
             Username = username;
             Password = password;
+            Role = role;
+        }
+
+        public User(int userID, string username, Role role)
+        {
+            UserID=userID;
+            Username = username;
             Role = role;
         }
     }

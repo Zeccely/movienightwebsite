@@ -13,8 +13,8 @@ namespace Movie_Night_Website.DataAccess.Data
     public class UserRepository : IUserRepository
     {
         private readonly string connectionString;
-   
-        public UserRepository (IConfiguration configuration)
+
+        public UserRepository(IConfiguration configuration)
         {
             connectionString = configuration.GetConnectionString("HomeConnection");
         }
@@ -95,7 +95,7 @@ namespace Movie_Night_Website.DataAccess.Data
                 using SqlDataReader reader = sqlCommand.ExecuteReader();
                 if (reader.Read())
                 {
-                    
+
                     string dbusername = reader.GetString(1);
                     string dbhashpassword = reader.GetString(2);
                     string salt = reader.GetString(3);
@@ -106,6 +106,42 @@ namespace Movie_Night_Website.DataAccess.Data
 
                 }
                 return fetchedUser;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public List<User> GetAllUsers()
+        {
+            List<User>fetchedUsers = new();
+            string query = "Select Id, Username, Role from Users";
+            using SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+            try
+            {
+                sqlConnection.Open();
+                using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                using SqlDataReader reader = sqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    User fetchedUser = null;
+                    int Id = reader.GetInt32(0);
+                    string dbusername = reader.GetString(1);
+                    string dbrole = reader.GetString(2);
+
+                    fetchedUser = new User(Id, dbusername, Enum.Parse<Role>(dbrole));
+                    fetchedUsers.Add(fetchedUser);
+
+
+                }
+                return fetchedUsers;
             }
             catch (SqlException ex)
             {

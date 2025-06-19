@@ -30,7 +30,6 @@ namespace Movie_Night_Website.DataAccess.Data
                 sqlConnection.Open();
                 using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MediaId", mediaId);
-                sqlConnection.Open();
                 count = (int)sqlCommand.ExecuteScalar();
                 return count;
             }
@@ -57,7 +56,6 @@ namespace Movie_Night_Website.DataAccess.Data
                 sqlConnection.Open();
                 using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MediaId", mediaId);
-                sqlConnection.Open();
                 count = (int)sqlCommand.ExecuteScalar();
                 return count;
             }

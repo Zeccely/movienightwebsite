@@ -56,5 +56,10 @@ namespace Movie_Night_Website.Service
         {
             return _userRepo.GetUserById(id);
         }
+
+        public List<User> GetUsers()
+        {
+            return _userRepo.GetAllUsers();
+        }
     }
 }
