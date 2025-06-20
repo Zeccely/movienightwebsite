@@ -13,15 +13,22 @@ namespace Movie_Night_website.Services
             _mediaVoteRepository = mediaVoteRepository;
             _mediaRepository = mediaRepository;
         }
-        public void CastVote(int userId, int movieId, bool vote)
+        public void CastVote(int userId, int mediaId, bool vote)
         {
-            _mediaVoteRepository.CastVote(userId, movieId, vote);
+            _mediaVoteRepository.CastVote(userId, mediaId, vote);
+            EvaluateVotes(mediaId);
         }
 
         public void EvaluateVotes(int mediaId) //unit test this
         {
             int positiveVotes = _mediaVoteRepository.GetPositiveVotes(mediaId);
             int negativeVotes = _mediaVoteRepository.GetNegativeVotes(mediaId);
+            int totalVotes = positiveVotes + negativeVotes;
+
+            if (totalVotes <= 3) 
+            {
+                return;
+            };
 
             if (positiveVotes > negativeVotes)
             {
@@ -32,12 +39,18 @@ namespace Movie_Night_website.Services
             {
                 _mediaVoteRepository.SetFinalVerdict(mediaId, false);
             }
+            return;
         }
 
-        public List<Media> DisplayMedia() //will rethink this later squint
+        public List<Media> DisplayMedia() 
         {
             List<Media> mediaList = _mediaRepository.GetAllMedia();
             return mediaList;
+        }
+
+        public bool HasUserVoted(int userId, int mediaId)
+        {
+            return _mediaVoteRepository.UserVoteCheck(userId, mediaId);
         }
     }
 }

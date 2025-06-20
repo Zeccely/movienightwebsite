@@ -4,14 +4,14 @@
     {
         public int UserID { get; set; }
 
-        public int ContenderMediaID { get; set; }
+        public int MediaID { get; set; }
 
         public bool Liked { get; set; }
 
         public UserVote(int userID, int contenderMediaID, bool liked)
         {
             UserID = userID;
-            ContenderMediaID = contenderMediaID;
+            MediaID = contenderMediaID;
             Liked = liked;
         }
     }

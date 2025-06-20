@@ -37,10 +37,10 @@ namespace Movie_Night_website.Pages
             if (UserID != null)
             {
                 _mediaService.AddMediaToDB(Title, TrailerURL, MediaType, Convert.ToInt32(UserID));
-                //clear text boxes pls
+                ModelState.Clear();
+                Title = TrailerURL = MediaType = string.Empty;
             }
-            
-            
+ 
         }
 
         public void OnGet() 

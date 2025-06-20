@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Movie_Night_Website.Domain.Interfaces
 {
-    public interface IUserRepository //crud here
+    public interface IUserRepository
     { 
         void AddUser(string username, string hashpassword, string salt);
         User GetUser(string username);

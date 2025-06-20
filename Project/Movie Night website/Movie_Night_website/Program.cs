@@ -20,10 +20,11 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMediaRepository, MediaRepository>();
 builder.Services.AddScoped<IAuthentication, AuthenticationService>();
 builder.Services.AddScoped<IMediaVoteRepository, MediaVoteRepository>();
+builder.Services.AddScoped<IMovieNightRepository, MovieNightRepository>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<MediaService>();
 builder.Services.AddScoped<VotingService>();
-builder.Services.AddScoped<IMovieNightRepository, MovieNightRepository>();
+builder.Services.AddScoped<OrganizerService>();
 
 builder.Services.AddDistributedMemoryCache();
 
@@ -40,6 +41,7 @@ builder.Services.AddAuthentication("MyCookieAuth")
         options.LoginPath = "/Index";
         options.LogoutPath = "/Logout";
         options.Cookie.Name = "MovieNightAuth";
+        options.AccessDeniedPath = "/Home";
         options.ExpireTimeSpan = TimeSpan.FromDays(1); 
     });
 

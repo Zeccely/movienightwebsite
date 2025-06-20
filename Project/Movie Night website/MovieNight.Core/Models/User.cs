@@ -2,7 +2,6 @@
 {
     public class User
     {
-        public List<User> Users { get; set; } = new List<User>();
         public int UserID { get; set; }
 
         public string Username { get; set; }

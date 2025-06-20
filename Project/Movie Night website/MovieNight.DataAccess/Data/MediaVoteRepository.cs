@@ -16,7 +16,7 @@ namespace Movie_Night_Website.DataAccess.Data
 
         public MediaVoteRepository(IConfiguration configuration)
         {
-            connectionString = configuration.GetConnectionString("LaptopConnection");
+            connectionString = configuration.GetConnectionString("HomeConnection");
         }
 
         public int GetPositiveVotes(int mediaId) //count the votes on this movie
@@ -112,6 +112,28 @@ namespace Movie_Night_Website.DataAccess.Data
                 sqlConnection.Open();
                 using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@verdict", verdict);
+                sqlCommand.Parameters.AddWithValue("@mediaId", mediaId);
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public void ResetFinalVerdict(int mediaId)
+        {
+            string query = "Update Media Set FinalVerdict = NULL where Id = @mediaId";
+            using SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+            try
+            {
+                sqlConnection.Open();
+                using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@mediaId", mediaId);
                 sqlCommand.ExecuteNonQuery();
             }

@@ -44,9 +44,6 @@ namespace Movie_Night_website.Pages
 
             if (loggingin != null)
             {
-                //HttpContext.Session.SetInt32("ContributorID", loggingin.ContributorID);
-                //HttpContext.Session.SetString("Username", loggingin.Username);
-                //HttpContext.Session.SetString("Role", loggingin.Role.ToString());
 
                 List<Claim> claims = new List<Claim>
                 {

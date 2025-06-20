@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Movie_Night_website.Models;
 using Movie_Night_Website.Domain.Interfaces;
 
@@ -13,27 +14,56 @@ namespace Movie_Night_Website.DataAccess.Data
     public class MovieNightRepository : IMovieNightRepository
     {
         private readonly string connectionString;
-        public MovieNightRepository(IConfiguration configuration)
+        public MovieNightRepository(ILogger<MovieNightRepository> logger, IConfiguration configuration)
         {
-            connectionString = configuration.GetConnectionString("LaptopConnection");
+            connectionString = configuration.GetConnectionString("HomeConnection");
         }
-        public void AddUserToMovieNight(int userId, int movieNightId)
+
+        public void AddUsersToMovieNight(List<int> userIds, int mediaId)
         {
-            string query = """
-                          Insert into MovieNight (Media_Id, DateOfEvent) Values (@Media_Id, @Datetime)
-                Set @Id = SCOPE_IDENTITY()
-                Insert into MovieAttendees (User_Id, MovieNight_Id) Values (@UserId, @Id)
-                """;
+            
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+            sqlConnection.Open();
+            string Nightquery = """
+                Insert into MovieNight (Media_Id, DateOfEvent) Values (@Media_Id, @Datetime)
+                Select Scope_Identity();
+                """;
+            string attendeeQuery = "Insert into MovieAttendees(User_Id, MovieNight_Id) Values(@UserId, @MovieNightId)";
+
+
+            DateTime dateTime = GetNextFridayAt19();
+            int movieNightId = 0;
+
+            if(userIds == null || userIds.Count == 0 || mediaId == 0) 
+            {
+                return; 
+            }
 
             try
             {
-                sqlConnection.Open();
-                using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@UserId", userId);
-                sqlCommand.Parameters.AddWithValue("@MovieNightId", movieNightId);
+                using (SqlCommand cmd = new SqlCommand(Nightquery, sqlConnection))
+                {   
+                    cmd.Parameters.AddWithValue("@Media_Id", mediaId);
+                    cmd.Parameters.AddWithValue("@Datetime", dateTime);
+                    movieNightId = (int)(decimal)cmd.ExecuteScalar();
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
 
-                sqlCommand.ExecuteNonQuery();
+            try
+            {
+                foreach (int userId in userIds)
+                {
+                    using SqlCommand sqlCommand = new SqlCommand(attendeeQuery, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@UserId", userId);
+                    sqlCommand.Parameters.AddWithValue("@MovieNightId", movieNightId);
+                    sqlCommand.ExecuteNonQuery();
+                }
             }
             catch (SqlException ex)
             {
@@ -93,7 +123,7 @@ namespace Movie_Night_Website.DataAccess.Data
             }
         }
 
-        public void CreateMovieNight(int mediaId)
+        public void CreateMovieNight(int mediaId) //Merged with add movies
         {
             string query = "Insert into MovieNight (Media_Id, DateOfEvent) Values (@Media_Id, @Datetime) ";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);

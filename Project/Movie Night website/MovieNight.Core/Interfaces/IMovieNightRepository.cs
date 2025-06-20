@@ -11,7 +11,7 @@ namespace Movie_Night_Website.Domain.Interfaces
 
         void CreateMovieNight(int movieId);
 
-        void AddUserToMovieNight(int userId, int movieNightId);
+        void AddUsersToMovieNight(List<int> userIds, int mediaId);
 
         void RemoveUserFromMovieNight(int userId, int movieNightId);
 

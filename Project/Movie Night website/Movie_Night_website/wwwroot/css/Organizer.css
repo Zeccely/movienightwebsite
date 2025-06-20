@@ -1,0 +1,46 @@
+﻿body {
+}
+
+.UsersArea {
+    width: 200px;
+    height: 250px;
+    margin: 20px a;
+    z-index: 1;
+    background: rgba(255,255,255,0.1);
+    box-shadow: rgba(0,0,0,0.1) 0 4px 6px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+}
+
+.MediaCard {
+    width: 200px;
+    height: 150px;
+    margin: 20px;
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.1);
+    box-shadow: rgba(0,0,0,0.1) 0 4px 6px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+}
+
+.blur {
+    background: rgba(255,255,255,0.1);
+    box-shadow: rgba(0,0,0,0.1) 0 4px 6px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+}
+
+.bordery {
+    border: 1px solid #fff;
+    border-radius: 10px;
+}
+
+.UsersHeader{
+    text-align: center;
+}
+.MovieHeader {
+    color: white;
+    text-align: center
+}
+

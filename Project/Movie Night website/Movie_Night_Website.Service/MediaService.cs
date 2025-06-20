@@ -14,13 +14,11 @@ namespace Movie_Night_website.Services
             _mediaRepository = mediaRepository;
         }
 
-        public List<Media> ContributedMedia { get; set; } = [];
-
         public List<Media> TheCurrentList { get; set; } = [];
 
         public List<Media> WatchedMedia { get; set; } = [];
 
-        public void AddMediaToDB(string title, string trailerURL, string mediaTypeText, int userID)
+        public void AddMediaToDB(string title, string trailerURL, string mediaTypeText, int userID) //unit test this
         {
             int mediaTypeId;
 
@@ -30,15 +28,23 @@ namespace Movie_Night_website.Services
             }
             else
             {
-                Console.WriteLine("That did not work or exists");
+                Console.WriteLine("That did not work or Mediatype exists");
             }
            
-
             mediaTypeId = _mediaRepository.GetMediaTypeID(mediaTypeText);
 
             _mediaRepository.AddMedia(title, trailerURL, mediaTypeId, userID);
         }
 
+        public List<Media> GetAllMedia()
+        {
+           return _mediaRepository.GetAllMedia();
+        }
+
+        public List<Media> GetApprovedMedia()
+        {
+            return _mediaRepository.GetApprovedMedia();
+        }
 
     }
 

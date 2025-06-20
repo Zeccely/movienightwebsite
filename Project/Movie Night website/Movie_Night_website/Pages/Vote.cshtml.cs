@@ -31,13 +31,20 @@ namespace Movie_Night_website.Pages
         public void OnGet()
         {
             int.TryParse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int UserId);
+            
             MediaList = _votingService.DisplayMedia();
-
+            List<Media> filteredList = new();
             foreach (Media media in MediaList)
             {
+                if (!_votingService.HasUserVoted(UserId, media.MediaID))
+                {
+                    filteredList.Add(media);
+                }
                 User Submittedby = _userService.GetUserById(media.ContributorID);
                 media.Contributor = Submittedby;
             }
+
+            MediaList = filteredList;
         }
 
         public async Task<IActionResult> OnPostAsync(int mediaId)

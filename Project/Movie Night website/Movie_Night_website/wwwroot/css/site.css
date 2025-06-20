@@ -51,7 +51,7 @@ body {
 }
 
 .custom-checkbox input[type="checkbox"] {
-    display: block;
+    display: none;
 }
 
 input[type="checkbox"]:checked + .custom-checkbox .thumbs-up {

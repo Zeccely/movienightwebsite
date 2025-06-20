@@ -2,19 +2,21 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Movie_Night_website.Models;
+using Movie_Night_website.Services;
 
 namespace Movie_Night_website.Pages
 {
-    [Authorize]
+    [Authorize(Roles ="Regular")]
     public class LibraryModel : PageModel
     {
+        private readonly MediaService _mediaService;
         public List<Media> AllMedia {  get; set; }
-        public List<MovieNight> PastEvents { get; set; }
+        public List<MovieNight> PastEvents { get; set; } // can create this with that construckter
 
         public void OnGet()
         {
-            //get all media and display unwatched movies and already watched movies 
-            //check if movies have a datetime set on movienight and display accordingly
+            //get watched and unwatched media and display 
+            //inner join tables and such
         }
     }
 }

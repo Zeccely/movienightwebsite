@@ -23,7 +23,7 @@ namespace MovieNightTests.FakeData
 
         public List<User> GetAllUsers()
         {
-            throw new NotImplementedException();
+            return _users;
         }
 
         public User GetUser(string username)

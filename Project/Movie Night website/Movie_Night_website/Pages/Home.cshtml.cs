@@ -11,9 +11,5 @@ namespace Movie_Night_website.Pages
     {
         private readonly ILogger<HomeModel> _logger;
 
-     
-
-
-
     }
 }

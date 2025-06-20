@@ -23,9 +23,9 @@ namespace Movie_Night_Website.Service
         }
 
 
-        public User Login(string username, string plainpassword)
+        public User Login(string username, string plainpassword) //test
         {
-            var user = _userRepo.GetUser(username);
+            User user = _userRepo.GetUser(username);
             if (user == null)
             {
                 return null;
