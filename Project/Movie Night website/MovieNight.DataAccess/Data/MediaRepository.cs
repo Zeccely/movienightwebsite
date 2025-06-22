@@ -27,7 +27,7 @@ namespace Movie_Night_Website.DataAccess.Data
 
         public bool CheckMediaType(string mediaTypeName) //should have refactored
         {
-            string query = "Select Id From MediaTypes Where Name = @MediaTypeName"; // please check if the mediatype exists
+            string query = "Select Id From MediaTypes Where Name = @MediaTypeName"; 
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
 
             try

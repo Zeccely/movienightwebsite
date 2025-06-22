@@ -2,5 +2,40 @@
 @model Movie_Night_website.Pages.RollModel
 @{
 }
+<div class="Formstyle">
+    <h1 class="text-center">Temporary Rolling View</h1>
+
+    <form method="post" id="RollingForm">
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <div class="mb-3 text-center">
+                
+
+                <form method="post">
+                    <button type="submit" class="btn btn-primary">Roll</button>
+                </form>
+
+                @if (Model.ChosenMedia != null)
+                {
+                    <div class="mt-4 card p-3 shadow">
+                        <h4>You rolled: @Model.ChosenMedia.Title</h4>
+                        <p><strong>Trailer:</strong> <a href="@Model.ChosenMedia.TrailerURL" target="_blank">Watch</a></p>
+                        <p><strong>Submitted by:</strong> @Model.ChosenMedia.Contributor?.Username</p>
+                        <p><strong>Media Type:</strong> @Model.ChosenMedia.MediaType.Name</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="mb-3"></div>
+        <div class="mb-3"></div>
+    </form>
+</div>
+
+
+
+
+
+
+
 
 
