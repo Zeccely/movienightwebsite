@@ -16,7 +16,7 @@ namespace Movie_Night_Website.DataAccess.Data
         private readonly string connectionString;
         public MovieNightRepository(ILogger<MovieNightRepository> logger, IConfiguration configuration)
         {
-            connectionString = configuration.GetConnectionString("HomeConnection");
+            connectionString = configuration.GetConnectionString("Deployed");
         }
 
         public void AddUsersToMovieNight(List<int> userIds, int mediaId)

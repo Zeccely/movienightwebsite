@@ -23,6 +23,8 @@ namespace Movie_Night_Website.Domain.Interfaces
 
         List<Media> GetApprovedMedia();
 
+        bool DidUserSubmitMedia(int userId, int mediaId);
+
 
 
 

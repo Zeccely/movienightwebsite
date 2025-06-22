@@ -18,7 +18,7 @@ namespace Movie_Night_Website.DataAccess.Data
 
         public UserRepository(ILogger<UserRepository> logger ,IConfiguration configuration)
         {
-            connectionString = configuration.GetConnectionString("HomeConnection");
+            connectionString = configuration.GetConnectionString("Deployed");
             this.logger = logger;
             logger.LogInformation("Repo created");
         }

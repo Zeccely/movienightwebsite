@@ -63,7 +63,7 @@ namespace MovieNightTests
             _service.EvaluateVotes(2);
 
             //Assert
-            _medVoteRepoMock.Verify(r => r.SetFinalVerdict(It.IsAny<int>(), It.IsAny<bool>()), Times.Never()); //is not called at all
+            _medVoteRepoMock.Verify(repo => repo.SetFinalVerdict(It.IsAny<int>(), It.IsAny<bool>()), Times.Never()); //is not called at all
 
         }
 
@@ -80,8 +80,34 @@ namespace MovieNightTests
             _service.EvaluateVotes(2);
 
             //Assert
-            _medVoteRepoMock.Verify(r => r.SetFinalVerdict(It.IsAny<int>(), It.IsAny<bool>()), Times.Never()); //is not called at all
+            _medVoteRepoMock.Verify(repo => repo.SetFinalVerdict(It.IsAny<int>(), It.IsAny<bool>()), Times.Never()); //is not called at all
 
+        }
+
+        [Fact]
+        public void CastVote_ReturnsNothing_UserSubmittedMedia()
+        {
+            //Arrange
+            _medRepoMock.Setup(repo => repo.DidUserSubmitMedia(It.IsAny<int>(), It.IsAny<int>())).Returns(true);
+
+            //Act
+            _service.CastVote(1, 1, true);
+
+            //Assert
+            _medVoteRepoMock.Verify(repo => repo.CastVote(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<bool>()), Times.Never);
+        }
+        [Fact]
+        public void CastVote_ReturnsNothing_UserDidNotSubmitMedia()
+        {
+            //Arrange
+            _medRepoMock.Setup(repo => repo.DidUserSubmitMedia(It.IsAny<int>(), It.IsAny<int>())).Returns(false);
+            _medVoteRepoMock.Setup(repo => repo.CastVote(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<bool>()));
+
+            //Act
+            _service.CastVote(1, 1, true);
+
+            //Assert
+            _medVoteRepoMock.Verify(repo => repo.CastVote(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<bool>()), Times.Once);
         }
     }
 }

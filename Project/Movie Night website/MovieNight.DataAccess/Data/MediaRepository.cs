@@ -21,7 +21,7 @@ namespace Movie_Night_Website.DataAccess.Data
 
         public MediaRepository(ILogger<MediaRepository> logger, IConfiguration configuration)
         {
-            connectionString = configuration.GetConnectionString("HomeConnection");
+            connectionString = configuration.GetConnectionString("Deployed");
             this.logger = logger;
         }
 
@@ -276,6 +276,34 @@ namespace Movie_Night_Website.DataAccess.Data
             {
                 sqlConnection.Close();
             }
+
+        }
+
+        public bool DidUserSubmitMedia(int userId, int mediaId)
+        {
+            string query = "Select * from Media where UserID = @userID";
+            using SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+            try
+            {
+                sqlConnection.Open();
+                using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@userId", userId);
+                sqlCommand.Parameters.AddWithValue("@mediaId", mediaId);
+
+
+                using SqlDataReader reader = sqlCommand.ExecuteReader();
+                return reader.HasRows;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+            return false;
         }
     } 
 }

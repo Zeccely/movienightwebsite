@@ -15,6 +15,10 @@ namespace Movie_Night_website.Services
         }
         public void CastVote(int userId, int mediaId, bool vote)
         {
+            if (_mediaRepository.DidUserSubmitMedia(userId, mediaId))
+            {
+                return;
+            }
             _mediaVoteRepository.CastVote(userId, mediaId, vote);
             EvaluateVotes(mediaId);
         }

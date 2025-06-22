@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Movie_Night_website</RootNamespace>
+    <UserSecretsId>b33211c0-a0d4-4878-bbb2-7c69c9f26cb9</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

@@ -16,7 +16,7 @@ namespace Movie_Night_Website.DataAccess.Data
 
         public MediaVoteRepository(IConfiguration configuration)
         {
-            connectionString = configuration.GetConnectionString("HomeConnection");
+            connectionString = configuration.GetConnectionString("Deployed");
         }
 
         public int GetPositiveVotes(int mediaId) //count the votes on this movie
@@ -70,11 +70,11 @@ namespace Movie_Night_Website.DataAccess.Data
             return 0;
         }
 
-      
+
 
         public void CastVote(int userID, int mediaID, bool vote) //should I bool this
         {
-            
+
             if (UserVoteCheck(userID, mediaID))
             {
                 return;
@@ -106,7 +106,7 @@ namespace Movie_Night_Website.DataAccess.Data
         {
             string query = "Update Media Set FinalVerdict = @verdict where Id = @mediaId";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
-            
+
             try
             {
                 sqlConnection.Open();
@@ -158,10 +158,10 @@ namespace Movie_Night_Website.DataAccess.Data
                 using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@userId", userId);
                 sqlCommand.Parameters.AddWithValue("@mediaId", mediaId);
-                
+
 
                 using SqlDataReader reader = sqlCommand.ExecuteReader();
-                return reader.HasRows; 
+                return reader.HasRows;
             }
             catch (Exception ex)
             {
@@ -173,5 +173,8 @@ namespace Movie_Night_Website.DataAccess.Data
             }
             return false;
         }
+ 
+
     }
+    
 }
