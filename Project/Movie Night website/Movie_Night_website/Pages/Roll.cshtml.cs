@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Movie_Night_website.Models;
 using Movie_Night_website.Services;
+using Movie_Night_Website.Service;
 
 namespace Movie_Night_website.Pages
 {
@@ -13,20 +14,26 @@ namespace Movie_Night_website.Pages
         public Media ChosenMedia { get; set; }
         OrganizerService _admin;
         MediaService _mediaService;
-        public RollModel(OrganizerService admin, MediaService _mediaServ)
+        UserService _userService;
+        public RollModel(OrganizerService admin, MediaService _mediaServ, UserService userService)
         {
             _admin = admin;
             _mediaService = _mediaServ;
+            _userService = userService;
         }
 
        
         public void OnGet()
         {
-            MediaList = _mediaService.GetApprovedMedia();
         }
         public void OnPost() 
         {
-            _admin.GrabRandomMovie(MediaList);
+            MediaList = _mediaService.GetApprovedMedia();
+            ChosenMedia = _admin.GrabRandomMovie(MediaList);
+
+            User submittedby = _userService.GetUserById(ChosenMedia.ContributorID);
+
+
         }
     }
 }

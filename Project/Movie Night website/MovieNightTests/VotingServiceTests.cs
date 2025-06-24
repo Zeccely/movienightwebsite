@@ -30,7 +30,7 @@ namespace MovieNightTests
             _service.EvaluateVotes(3);
 
             //Assert
-            _medVoteRepoMock.Verify(result => result.SetFinalVerdict(3, true), Times.Once()); //accepted media
+            _medVoteRepoMock.Verify(result => result.UpdateFinalVerdict(3, true), Times.Once()); //accepted media
 
         }
 
@@ -47,7 +47,7 @@ namespace MovieNightTests
             _service.EvaluateVotes(2);
 
             //Assert
-            _medVoteRepoMock.Verify(result => result.SetFinalVerdict(2, false), Times.Once()); //rejected media
+            _medVoteRepoMock.Verify(result => result.UpdateFinalVerdict(2, false), Times.Once()); //rejected media
 
         }
         [Fact]
@@ -63,7 +63,7 @@ namespace MovieNightTests
             _service.EvaluateVotes(2);
 
             //Assert
-            _medVoteRepoMock.Verify(repo => repo.SetFinalVerdict(It.IsAny<int>(), It.IsAny<bool>()), Times.Never()); //is not called at all
+            _medVoteRepoMock.Verify(repo => repo.UpdateFinalVerdict(It.IsAny<int>(), It.IsAny<bool>()), Times.Never()); //is not called at all
 
         }
 
@@ -80,7 +80,7 @@ namespace MovieNightTests
             _service.EvaluateVotes(2);
 
             //Assert
-            _medVoteRepoMock.Verify(repo => repo.SetFinalVerdict(It.IsAny<int>(), It.IsAny<bool>()), Times.Never()); //is not called at all
+            _medVoteRepoMock.Verify(repo => repo.UpdateFinalVerdict(It.IsAny<int>(), It.IsAny<bool>()), Times.Never()); //is not called at all
 
         }
 

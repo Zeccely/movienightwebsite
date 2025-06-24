@@ -29,19 +29,20 @@ namespace Movie_Night_website.Services
             int negativeVotes = _mediaVoteRepository.GetNegativeVotes(mediaId);
             int totalVotes = positiveVotes + negativeVotes;
 
-            if (totalVotes <= 3) 
+            if (totalVotes <= 2) 
             {
                 return;
             };
 
             if (positiveVotes > negativeVotes)
             {
-                _mediaVoteRepository.SetFinalVerdict(mediaId, true);
+                _mediaVoteRepository.UpdateFinalVerdict(mediaId, true);
                 
             }
             else if (negativeVotes > positiveVotes)
             {
-                _mediaVoteRepository.SetFinalVerdict(mediaId, false);
+                _mediaVoteRepository.UpdateFinalVerdict(mediaId, false);
+                
             }
             return;
         }

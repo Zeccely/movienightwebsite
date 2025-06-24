@@ -8,11 +8,8 @@
     <form method="post" id="RollingForm">
         <div class="d-flex justify-content-center align-items-center flex-column">
             <div class="mb-3 text-center">
+                <button type="submit" class="btn btn-primary">Roll</button>
                 
-
-                <form method="post">
-                    <button type="submit" class="btn btn-primary">Roll</button>
-                </form>
 
                 @if (Model.ChosenMedia != null)
                 {
@@ -20,7 +17,7 @@
                         <h4>You rolled: @Model.ChosenMedia.Title</h4>
                         <p><strong>Trailer:</strong> <a href="@Model.ChosenMedia.TrailerURL" target="_blank">Watch</a></p>
                         <p><strong>Submitted by:</strong> @Model.ChosenMedia.Contributor?.Username</p>
-                        <p><strong>Media Type:</strong> @Model.ChosenMedia.MediaType.Name</p>
+                        <p><strong>Media Type:</strong> @Model.ChosenMedia.MediaType</p>
                     </div>
                 }
             </div>

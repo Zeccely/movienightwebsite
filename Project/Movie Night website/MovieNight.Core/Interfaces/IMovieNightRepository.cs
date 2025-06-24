@@ -9,9 +9,9 @@ namespace Movie_Night_Website.Domain.Interfaces
     public interface IMovieNightRepository
     {
 
-        void CreateMovieNight(int movieId);
+        void AddToHistory(int userId, int movieId);
 
-        void AddUsersToMovieNight(List<int> userIds, int mediaId);
+        void AddUsersAndCreateMovieNight(List<int> userIds, int mediaId);
 
         void RemoveUserFromMovieNight(int userId, int movieNightId);
 

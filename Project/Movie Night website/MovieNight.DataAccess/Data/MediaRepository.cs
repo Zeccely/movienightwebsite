@@ -212,7 +212,7 @@ namespace Movie_Night_Website.DataAccess.Data
         public List<Media> GetApprovedMedia()
         {
             List<Media> votedMedia = new();
-            string query = "Select * From Media Where FinalVerdict is not NULL";
+            string query = "Select * From Media Where FinalVerdict = 1";
             using SqlConnection sqlConnection = new(connectionString);
             try
             {
@@ -281,7 +281,7 @@ namespace Movie_Night_Website.DataAccess.Data
 
         public bool DidUserSubmitMedia(int userId, int mediaId)
         {
-            string query = "Select * from Media where UserID = @userID";
+            string query = "Select * from Media where UserID = @userID and Id = @mediaId";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
 
             try
@@ -305,5 +305,41 @@ namespace Movie_Night_Website.DataAccess.Data
             }
             return false;
         }
-    } 
+        public Media GetMedia(int mediaId)
+        {
+            string query = "Select * from Media where Id = @MediaId";
+            using SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+            try
+            {
+                sqlConnection.Open();
+                using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@MediaId", mediaId);
+
+                using SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    int id = reader.GetInt32(0);
+                    int contributorId = reader.GetInt32(1);
+                    string title = reader.GetString(2);
+                    string trailer = reader.GetString(3);
+                    int mediaTypeId = reader.GetInt32(4);
+
+                    return new Media(id, trailer, title, mediaTypeId, contributorId);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+            return null; // fallback if no row found
+        }
+
+    }
 }

@@ -15,7 +15,7 @@ namespace Movie_Night_Website.Domain.Interfaces
 
         int GetNegativeVotes(int mediaId);
 
-        void SetFinalVerdict(int mediaId, bool verdict);
+        void UpdateFinalVerdict(int mediaId, bool? verdict);
 
         void ResetFinalVerdict(int mediaId);
 

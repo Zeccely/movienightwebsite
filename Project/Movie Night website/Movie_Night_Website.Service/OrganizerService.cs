@@ -18,7 +18,24 @@ namespace Movie_Night_website.Services
 
         public void CreateMovieNight(List<int> ids, int chosenMediaId)
         {
-            _movieNightRepo.AddUsersToMovieNight(ids, chosenMediaId);
+            if (ids != null || chosenMediaId != 0)
+            {
+                _movieNightRepo.AddUsersAndCreateMovieNight(ids, chosenMediaId);
+            }
+
+        }
+
+        public void CreateHistory(List<int> ids, int chosenMediaId)
+        {
+            if (ids != null && chosenMediaId != 0)
+            {   
+                foreach (int userId in ids)
+                {
+                    _movieNightRepo.AddToHistory(userId, chosenMediaId);
+                }
+
+            }
+         
         }
 
         public Media GrabRandomMovie(List<Media> MediaList) //Should this be in mediaservice? this is unit testable!
@@ -26,13 +43,16 @@ namespace Movie_Night_website.Services
             
             MediaList = _mediaRepo.GetApprovedMedia();
 
-            if (MediaList.Count == 0 || MediaList == null)
+            if (MediaList.Count != 0 || MediaList != null)
             {
-                return null;
+                int randomindex = rng.Next(0, MediaList.Count);
+                Media ChosenMedia = _mediaRepo.GetMedia(MediaList[randomindex].MediaID);
+
+                return ChosenMedia;
             }
-            int randomindex = rng.Next(0, MediaList.Count);
+
+            return null;
             
-            return MediaList[randomindex];
 
         }
 

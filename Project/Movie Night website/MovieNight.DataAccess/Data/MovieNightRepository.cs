@@ -19,7 +19,7 @@ namespace Movie_Night_Website.DataAccess.Data
             connectionString = configuration.GetConnectionString("Deployed");
         }
 
-        public void AddUsersToMovieNight(List<int> userIds, int mediaId)
+        public void AddUsersAndCreateMovieNight(List<int> userIds, int mediaId)
         {
             
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
@@ -34,11 +34,6 @@ namespace Movie_Night_Website.DataAccess.Data
 
             DateTime dateTime = GetNextFridayAt19();
             int movieNightId = 0;
-
-            if(userIds == null || userIds.Count == 0 || mediaId == 0) 
-            {
-                return; 
-            }
 
             try
             {
@@ -123,18 +118,17 @@ namespace Movie_Night_Website.DataAccess.Data
             }
         }
 
-        public void CreateMovieNight(int mediaId) //Merged with add movies
+        public void AddToHistory(int userId, int mediaId)
         {
-            string query = "Insert into MovieNight (Media_Id, DateOfEvent) Values (@Media_Id, @Datetime) ";
+            string query = "Insert into MediaHistory (User_Id, Media_Id) Values (@userId, @mediaId) ";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
 
-            DateTime dateTime = GetNextFridayAt19();
             try
             {
                 sqlConnection.Open();
                 using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@Media_Id", mediaId);
-                sqlCommand.Parameters.AddWithValue("@Datetime", dateTime);
+                sqlCommand.Parameters.AddWithValue("@userId", userId);
+                sqlCommand.Parameters.AddWithValue("@mediaId", mediaId);
 
                 sqlCommand.ExecuteNonQuery();
             }
@@ -147,6 +141,8 @@ namespace Movie_Night_Website.DataAccess.Data
                 sqlConnection.Close();
             }
         }
+
+        
 
         public DateTime GetNextFridayAt19()
         {

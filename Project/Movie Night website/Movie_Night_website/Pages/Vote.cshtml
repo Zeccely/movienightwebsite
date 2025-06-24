@@ -1,21 +1,37 @@
 ﻿@page
+@using System.Security.Claims;
 @model Movie_Night_website.Pages.VoteModel
 @{
 
     <link rel="stylesheet" href="~/css/Vote.css" />
+    var username = User.FindFirst(ClaimTypes.Name)?.Value;
 
 }
 <div class="VoteDisplay">
     @{int id = 0;}
+
     @foreach (var media in Model.MediaList)
     {
-        id++; 
+        id++;
+        
+        string contributor;
+        if (@media.Contributor.Username == User.FindFirst(ClaimTypes.Name).Value)
+        {
+
+            contributor = "You";
+        }
+        else 
+        {
+            contributor = media.Contributor.Username;
+        }
+    
         <form class="fullcard" method="post">
 
         <div class="MediaCard">
             <div class="card-body">
                 <h5 class="card-title">@media.Title</h5>
-                <h6 class="contributor">@media.Contributor.Username</h6>
+                <h6 class="contributor">@contributor</h6>
+              
                 <a href="@media.TrailerURL" target="_blank">Watch Trailer</a>
 
                     <label class="custom-checkbox">

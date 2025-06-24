@@ -17,6 +17,7 @@ namespace Movie_Night_website.Pages
         public string MediaTitle { get; set; }
         public string YoutubeLink { get; set; }
         public List<Media> MediaList { get; set; }
+
         [BindProperty]
         public bool Vote  { get; set; }
 

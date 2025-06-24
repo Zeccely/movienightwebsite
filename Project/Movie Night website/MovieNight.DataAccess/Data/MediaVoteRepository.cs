@@ -102,7 +102,7 @@ namespace Movie_Night_Website.DataAccess.Data
             }
         }
 
-        public void SetFinalVerdict(int mediaId, bool verdict)
+        public void UpdateFinalVerdict(int mediaId, bool? verdict)
         {
             string query = "Update Media Set FinalVerdict = @verdict where Id = @mediaId";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);
@@ -111,7 +111,7 @@ namespace Movie_Night_Website.DataAccess.Data
             {
                 sqlConnection.Open();
                 using SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@verdict", verdict);
+                sqlCommand.Parameters.AddWithValue("@verdict", (object?)verdict ?? DBNull.Value);
                 sqlCommand.Parameters.AddWithValue("@mediaId", mediaId);
                 sqlCommand.ExecuteNonQuery();
             }
@@ -125,7 +125,7 @@ namespace Movie_Night_Website.DataAccess.Data
             }
         }
 
-        public void ResetFinalVerdict(int mediaId)
+        public void ResetFinalVerdict(int mediaId) //might be unecessary?
         {
             string query = "Update Media Set FinalVerdict = NULL where Id = @mediaId";
             using SqlConnection sqlConnection = new SqlConnection(connectionString);

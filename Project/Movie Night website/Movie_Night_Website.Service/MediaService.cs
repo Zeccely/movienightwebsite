@@ -46,6 +46,11 @@ namespace Movie_Night_website.Services
             return _mediaRepository.GetApprovedMedia();
         }
 
+        public Media GetMedia(int id)
+        {
+            return _mediaRepository.GetMedia(id);
+        }
+
     }
 
 

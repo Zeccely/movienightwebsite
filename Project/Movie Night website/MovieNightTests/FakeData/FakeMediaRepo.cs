@@ -50,5 +50,10 @@ namespace MovieNightTests.FakeData
         {
             throw new NotImplementedException();
         }
+
+        Media IMediaRepository.GetMedia(int mediaId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
