@@ -9,10 +9,16 @@ using System.Net.Mime;
 using Microsoft.Extensions.Logging;
 
 
-
+// you forgot encapsulation. refactor
+//Change exception handling
+//Notify users of changes so features look clear
+//Change unit testing 
+//Add Integration testing
+//learn java and make super cool wheel of fortune
+//maybe refactor to DTOs it also helps with keeping data nice and secure
 
 namespace Movie_Night_Website.DataAccess.Data
-
+    
 {
     public class MediaRepository : IMediaRepository
     {
