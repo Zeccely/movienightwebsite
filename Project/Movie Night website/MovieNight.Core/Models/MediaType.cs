@@ -2,13 +2,18 @@
 {
     public class MediaType
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        private int Id { get; set; }
+        private string Name { get; set; }
 
         public MediaType(int id, string name)
         {
             Id = id;
             Name = name;
         }
+
+        public int GetId() {  return Id; }
+        public void SetId(int id) { Id = id; }
+        public string GetName() { return Name; }
+        public void SetName(string name) { Name = name; }
     }
 }

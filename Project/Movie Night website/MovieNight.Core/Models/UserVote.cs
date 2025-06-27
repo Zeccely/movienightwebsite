@@ -2,11 +2,11 @@
 {
     public class UserVote //hmm....
     {
-        public int UserID { get; set; }
+        private int UserID { get; set; }
 
-        public int MediaID { get; set; }
+        private int MediaID { get; set; }
 
-        public bool Liked { get; set; }
+        private bool Liked { get; set; }
 
         public UserVote(int userID, int contenderMediaID, bool liked)
         {
@@ -14,6 +14,14 @@
             MediaID = contenderMediaID;
             Liked = liked;
         }
+
+        public int GetUserID() {  return UserID; }
+        public void SetUserID(int userID) { UserID = userID; }
+        public int GetMediaID() { return MediaID; }
+        public void SetMediaID(int mediaID) { MediaID = mediaID; }
+        public bool GetLiked() { return Liked; } //Do I need this?
+        public void SetLiked(bool liked) { Liked = liked; }
+
     }
 
 }

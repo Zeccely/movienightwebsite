@@ -4,13 +4,13 @@ namespace Movie_Night_website.Models
 {
     public class Media
     {
-        public int MediaID { get; set; }
-        public string TrailerURL { get; set; }
-        public string Title { get; set; }
-        public MediaType MediaType { get; set; }
-        public int MediaTypeID { get; set; }
-        public int ContributorID { get; set; }
-        public User Contributor { get; set; }
+        private int MediaID { get; set; }
+        private string TrailerURL { get; set; }
+        private string Title { get; set; }
+        private MediaType MediaType { get; set; } //hm..
+        private int MediaTypeID { get; set; }
+        private int ContributorID { get; set; }
+        private User Contributor { get; set; } //hm...
 
         public Media (int mediaID, string trailerURL, string title, MediaType mediaType)
         {
@@ -28,6 +28,24 @@ namespace Movie_Night_website.Models
             MediaTypeID = mediaTypeId;
             ContributorID = contributor;
         }
+
+        public int GetMediaID()
+        {
+            return MediaID;
+        }
+
+        public void SetMediaId(int mediaID)
+        {
+            MediaID = mediaID;
+        }
+
+        public string GetTrailerURL() { return TrailerURL; }
+        public void SetTrailerURL(string trailerURL) {  TrailerURL = trailerURL; }
+        public string GetTitle() { return Title; }
+        public void SetTitle(string title) { Title = title; }
+        public int GetMediaTypeID() { return MediaTypeID; }
+        public void SetMediaTypeID(int mediaTypeID) { MediaTypeID = mediaTypeID; }
+
 
 
     }

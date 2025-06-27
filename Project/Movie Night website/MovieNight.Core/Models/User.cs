@@ -2,13 +2,13 @@
 {
     public class User
     {
-        public int UserID { get; set; }
+        private int UserID { get; set; }
 
-        public string Username { get; set; }
+        private string Username { get; set; }
 
-        public string Password { get; set; }
+        private string Password { get; set; }
 
-        public Role Role { get; }
+        private Role Role { get; }
 
         public User(int userID, string username, string password, Role role)
         {
@@ -24,6 +24,14 @@
             Username = username;
             Role = role;
         }
+        public int GetUserID() {  return UserID; }
+        public void SetUserID(int userId) {  UserID = userId; }
+        public string GetUserName() { return Username; }
+        public void SetUserName(string userName) { Username = userName; }
+        public string GetPassword() { return Password; }
+        public void SetPassword(string password) { Password = password; } // very suspicious method to be fair do I need this?
+        public Role GetRole() { return Role; }
+        
     }
 }
 

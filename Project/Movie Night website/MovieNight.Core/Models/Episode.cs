@@ -2,13 +2,13 @@
 {
     public class Episode
     {
-        public int EpisodeID { get; set; }
+        private int EpisodeID { get; set; }
 
-        public int SeriesID { get; set; }
+        private int SeriesID { get; set; }
 
-        public string EpisodeTitle { get; set; }
+        private string EpisodeTitle { get; set; }
 
-        public int EpisodeNumber { get; set; }
+        private int EpisodeNumber { get; set; }
 
         public Episode(int episodeID, int seriesID, string episodeTitle, int episodeNumber)
         {

@@ -9,6 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Authorization;
 
 
+
 namespace Movie_Night_website.Pages
 {
     [AllowAnonymous]
@@ -48,7 +49,7 @@ namespace Movie_Night_website.Pages
                 List<Claim> claims = new List<Claim>
                 {
                     new Claim (ClaimTypes.Name, loggingin.Username),
-                    new Claim (ClaimTypes.NameIdentifier, loggingin.UserID.ToString()),
+                    new Claim (ClaimTypes.NameIdentifier, loggingin.GetUserID.ToString()),
                     new Claim (ClaimTypes.Role, loggingin.Role.ToString())
                 };
 
