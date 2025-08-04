@@ -41,8 +41,8 @@ namespace Movie_Night_website.Pages
             foreach (Media media in MediaList)
             {
                
-                User Submittedby = _userService.GetUserById(media.ContributorID);
-                media.Contributor = Submittedby;
+                User Submittedby = _userService.GetUserById(media.GetContributorID());
+                //I need something here?
    
             }
         }
@@ -55,8 +55,8 @@ namespace Movie_Night_website.Pages
 
             foreach (Media media in MediaList)
             {
-                User submittedBy = _userService.GetUserById(media.ContributorID);
-                media.Contributor = submittedBy;
+                User submittedBy = _userService.GetUserById(media.GetContributorID());
+                //do I need something here?
             }
 
             _organizerService.CreateMovieNight(Attendees, ChosenMediaID);

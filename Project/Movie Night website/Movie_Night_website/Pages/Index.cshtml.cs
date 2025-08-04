@@ -48,9 +48,9 @@ namespace Movie_Night_website.Pages
 
                 List<Claim> claims = new List<Claim>
                 {
-                    new Claim (ClaimTypes.Name, loggingin.Username),
-                    new Claim (ClaimTypes.NameIdentifier, loggingin.GetUserID.ToString()),
-                    new Claim (ClaimTypes.Role, loggingin.Role.ToString())
+                    new Claim (ClaimTypes.Name, loggingin.GetUserName()),
+                    new Claim (ClaimTypes.NameIdentifier, loggingin.GetUserID().ToString()),
+                    new Claim (ClaimTypes.Role, loggingin.GetRole().ToString())
                 };
 
                 ClaimsIdentity identity = new ClaimsIdentity(claims, "MyCookieAuth");

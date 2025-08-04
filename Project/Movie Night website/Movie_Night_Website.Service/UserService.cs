@@ -31,7 +31,7 @@ namespace Movie_Night_Website.Service
                 return null;
             }
 
-            bool verified = _auth.VerifyPassword(plainpassword, user.Password);
+            bool verified = _auth.VerifyPassword(plainpassword, user.GetPassword());
 
             if (!verified)
             {

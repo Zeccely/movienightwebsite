@@ -20,13 +20,13 @@ namespace Movie_Night_website.Models
             MediaType = mediaType;
         }
 
-        public Media(int mediaID, string trailerURL, string title, int mediaTypeId, int contributor)
+        public Media(int mediaID, string trailerURL, string title, int mediaTypeId, int contributorID)
         {
             MediaID = mediaID;
             TrailerURL = trailerURL;
             Title = title;
             MediaTypeID = mediaTypeId;
-            ContributorID = contributor;
+            ContributorID = contributorID;
         }
 
         public int GetMediaID()
@@ -45,6 +45,7 @@ namespace Movie_Night_website.Models
         public void SetTitle(string title) { Title = title; }
         public int GetMediaTypeID() { return MediaTypeID; }
         public void SetMediaTypeID(int mediaTypeID) { MediaTypeID = mediaTypeID; }
+        public int GetContributorID() { return ContributorID; }
 
 
 
