@@ -37,12 +37,12 @@ namespace Movie_Night_website.Pages
             List<Media> filteredList = new();
             foreach (Media media in MediaList)
             {
-                if (!_votingService.HasUserVoted(UserId, media.MediaID))
+                if (!_votingService.HasUserVoted(UserId, media.GetMediaID()))
                 {
                     filteredList.Add(media);
                 }
-                User Submittedby = _userService.GetUserById(media.ContributorID);
-                media.Contributor = Submittedby;
+                User Submittedby = _userService.GetUserById(media.GetContributorID());
+                Username = Submittedby.GetUserName();
             }
 
             MediaList = filteredList;

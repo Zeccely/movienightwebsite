@@ -30,7 +30,7 @@ namespace MovieNightTests.FakeData
         {
             foreach (User user in _users)
             {
-                if (user.Username == username) 
+                if (user.GetUserName() == username) 
                 {  
                     return user; 
                 }
@@ -42,7 +42,7 @@ namespace MovieNightTests.FakeData
         {
             foreach (User user in _users)
             {
-                if (user.UserID == id)
+                if (user.GetUserID() == id)
                 {
                     return user;
                 }
