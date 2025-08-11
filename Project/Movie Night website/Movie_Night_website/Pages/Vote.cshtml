@@ -15,7 +15,7 @@
         id++;
         
         string contributor;
-        if (@media.Contributor.Username == User.FindFirst(ClaimTypes.Name).Value)
+        if (@media.GetContributorID() == User.FindFirst(ClaimTypes.Name).Value)
         {
 
             contributor = "You";
@@ -42,7 +42,7 @@
                         </span>
                     </label>
 
-                <input type="hidden" id="MediaId" name="MediaId" value="@media.MediaID" />
+                <input type="hidden" id="MediaId" name="MediaId" value="@media.GetMediaID()" />
 
                 <button type="submit">Submit Vote</button>
 

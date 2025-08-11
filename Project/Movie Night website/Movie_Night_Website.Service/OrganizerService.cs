@@ -43,10 +43,10 @@ namespace Movie_Night_website.Services
             
             MediaList = _mediaRepo.GetApprovedMedia();
 
-            if (MediaList.Count != 0 || MediaList != null)
+            if (MediaList != null && MediaList.Count != 0)
             {
                 int randomindex = rng.Next(0, MediaList.Count);
-                Media ChosenMedia = _mediaRepo.GetMedia(MediaList[randomindex].Media.GetMediaID());
+                Media ChosenMedia = _mediaRepo.GetMedia(MediaList[randomindex].GetMediaID());
 
                 return ChosenMedia;
             }

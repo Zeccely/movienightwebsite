@@ -13,9 +13,9 @@
           @foreach (var user in Model.UserList)
           {
               <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="@user.UserID" id="@user.UserID">
-              <label class="form-check-label" for="@user.UserID">
-              @user.Username
+              <input class="form-check-input" type="checkbox" value="@user.GetUserID()" id="@user.GetUserID()">
+              <label class="form-check-label" for="@user.GetUserID()">
+              @user.GetUserName()
               </label>
             </div>
           }
@@ -32,8 +32,8 @@
                 <div class="col ">
                     <div class="bordery">
                         <h5 class="card-title">@media.GetTitle()</h5>
-                        <h6 class="contributor">@media.Contributor?.Username</h6>
-                        <input type="radio" asp-for="ChosenMediaID" value="@media.MediaID" />
+                        <h6 class="contributor">@media.GetContributorID()</h6> 
+                        <input type="radio" asp-for="ChosenMediaID" value="@media.GetMediaID()" />
                     </div>
                 </div>
             }
