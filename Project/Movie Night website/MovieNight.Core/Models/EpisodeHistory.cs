@@ -2,11 +2,11 @@
 {
     public class EpisodeHistory
     {
-        public int UserID { get; set; }
+        public int UserID { get; private set; }
 
-        public int EpisodeID { get; set; }
+        public int EpisodeID { get; private set; }
 
-        public DateTime DateWatched { get; set; }
+        public DateTime DateWatched { get; private set; }
 
         public EpisodeHistory(int userID, int episodeID, DateTime datewatched)
         {

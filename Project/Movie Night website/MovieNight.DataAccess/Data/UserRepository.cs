@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Movie_Night_website.Models;
-using Movie_Night_Website.Domain.Interfaces;
+using Movie_Night_Website.DTO;
 
 namespace Movie_Night_Website.DataAccess.Data
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository
     {
         private readonly string connectionString;
         private readonly ILogger<UserRepository> logger;

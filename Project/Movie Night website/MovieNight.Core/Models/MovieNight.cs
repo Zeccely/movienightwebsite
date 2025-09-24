@@ -2,13 +2,13 @@
 {
     public class MovieNight
     {
-        public List<Media> OrganizerList { get; set; } = [];
+        public List<Media> OrganizerList { get; private set; } = [];
 
-        public List<User> Attendees { get; set; } = new List<User>();
+        public List<User> Attendees { get; private set; } = new List<User>();
 
-        public Media ChosenMedia { get; set; }
+        public Media ChosenMedia { get; private set; }
 
-        public DateTime ScheduledDate { get; set; }
+        public DateTime ScheduledDate { get; private set; }
 
 
         public MovieNight(List<Media> movieNightOrganizerList, List<User> atendees, Media watchedMedia, DateTime scheduleddate)

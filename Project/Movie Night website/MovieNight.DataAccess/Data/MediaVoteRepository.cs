@@ -1,7 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using Movie_Night_website.Models;
-using Movie_Night_Website.Domain.Interfaces;
+using Movie_Night_Website.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Movie_Night_Website.DataAccess.Data
 {
-    public class MediaVoteRepository : IMediaVoteRepository
+    public class MediaVoteRepository
     {
         private string connectionString;
 

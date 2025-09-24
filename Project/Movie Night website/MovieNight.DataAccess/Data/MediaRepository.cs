@@ -2,9 +2,8 @@
 using Microsoft.Data.SqlClient;      //Use the data layer thing
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Configuration;
-using Movie_Night_website.Models;
+using Movie_Night_Website.DTO;
 using BCrypt.Net;
-using Movie_Night_Website.Domain.Interfaces;
 using System.Net.Mime;
 using Microsoft.Extensions.Logging;
 
@@ -17,10 +16,11 @@ using Microsoft.Extensions.Logging;
 //learn java and make super cool wheel of fortune
 //maybe refactor to DTOs it also helps with keeping data nice and secure
 
+
 namespace Movie_Night_Website.DataAccess.Data
     
 {
-    public class MediaRepository : IMediaRepository
+    public class MediaRepository
     {
         private string connectionString;
         private readonly ILogger<MediaRepository> logger;
@@ -192,13 +192,14 @@ namespace Movie_Night_Website.DataAccess.Data
 
                 while (reader.Read())
                 {
-                    int Id = reader.GetInt32(0);
-                    int Submittedby = reader.GetInt32(1);
-                    string Title = reader.GetString(2);
-                    string TrailerURL = reader.GetString(3);
-                    int MediaTypeId = reader.GetInt32(4);
-
-                    Media NewMedia = new(Id, TrailerURL, Title, MediaTypeId, Submittedby);
+                    Media NewMedia = new()
+                    {
+                        MediaID = reader.GetInt32(0),
+                        ContributorID = reader.GetInt32(1),
+                        Title = reader.GetString(2),
+                        TrailerURL = reader.GetString(3),
+                        MediaTypeID = reader.GetInt32(4),
+                    };
 
                     allMedia.Add(NewMedia);
 

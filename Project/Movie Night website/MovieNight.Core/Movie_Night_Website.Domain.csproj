@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MovieNight.DataAccess\Movie_Night_Website.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>
